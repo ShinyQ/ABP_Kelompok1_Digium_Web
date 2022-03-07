@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'user'], function () {
+    Route::post('login', [UserController::class, 'login']);
+    Route::post('register', [UserController::class, 'register']);
+    Route::get('profile', [UserController::class, 'profile'])->middleware('user');
+    Route::get('logout', [UserController::class, 'logout']);
 });
-
-Route::apiResource('museum', \App\Http\Controllers\Api\MuseumController::class);
