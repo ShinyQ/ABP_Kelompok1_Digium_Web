@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('museums', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('background');
+            $table->string('panorama');
+            $table->text('description');
+            $table->string('address');
+            $table->string('phone');
+            $table->date('year_built')->nullable();
+            $table->point('coordinate');
+            $table->integer('price')->nullable();
             $table->timestamps();
         });
     }

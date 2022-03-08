@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('transaction_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('transaction_id')->constrained();
+            $table->string('name');
+            $table->string('qr_code');
             $table->timestamps();
         });
     }
