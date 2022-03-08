@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('museum_id')->constrained('museums');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('museum_id')->constrained();
             $table->integer('total_price');
             $table->integer('qty');
-            $table->enum('status', ['waiting_payment', 'paid', 'cancelled']);
+            $table->enum('status', ['Waiting Payment', 'Paid', 'Cancelled']);
             $table->timestamps();
         });
     }
