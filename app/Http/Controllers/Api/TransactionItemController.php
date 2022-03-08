@@ -3,63 +3,42 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\transactionItem;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Api;
 
 class TransactionItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        try {
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        } catch (Exception $e){
+
+        }
+
+        return Api::apiRespond($this->code, $this->response);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\transactionItem  $transaction_item
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Response
      */
-    public function show(transactionItem $transaction_item)
+    public function show($id)
     {
-        //
-    }
+        try {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\transactionItem  $transaction_item
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, transactionItem $transaction_item)
-    {
-        //
-    }
+        } catch (Exception $e){
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\transactionItem  $transaction_item
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(transactionItem $transaction_item)
-    {
-        //
+        }
+
+        return Api::apiRespond($this->code, $this->response);
     }
 }

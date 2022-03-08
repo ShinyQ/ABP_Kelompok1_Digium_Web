@@ -3,63 +3,41 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\gallery;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Api;
 
 class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        //
-    }
+        try {
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        } catch (Exception $e){
+
+        }
+
+        return Api::apiRespond($this->code, $this->response);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\gallery  $gallery
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Response
      */
-    public function show(gallery $gallery)
+    public function show($id)
     {
-        //
-    }
+        try {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, gallery $gallery)
-    {
-        //
-    }
+        } catch (Exception $e){
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(gallery $gallery)
-    {
-        //
+        }
+
+        return Api::apiRespond($this->code, $this->response);
     }
 }

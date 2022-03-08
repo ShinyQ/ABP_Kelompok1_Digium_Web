@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TransactionRequest;
 use App\Models\transaction;
+use Illuminate\Http\Response;
+use Api;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -11,55 +14,50 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try {
+
+        } catch (Exception $e){
+
+        }
+
+        return Api::apiRespond($this->code, $this->response);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param TransactionRequest $request
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(TransactionRequest $request)
     {
-        //
+        try {
+
+        } catch (Exception $e){
+
+        }
+
+        return Api::apiRespond($this->code, $this->response);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\transaction  $transaction
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Response
      */
-    public function show(transaction $transaction)
+    public function show($id)
     {
-        //
-    }
+        try {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, transaction $transaction)
-    {
-        //
-    }
+        } catch (Exception $e){
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(transaction $transaction)
-    {
-        //
+        }
+
+        return Api::apiRespond($this->code, $this->response);
     }
 }
