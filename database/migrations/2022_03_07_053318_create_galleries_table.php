@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
+            $table->foreignid('museum_id')->constrained();
+            $table->string('photo', 100);
             $table->timestamps();
         });
     }
