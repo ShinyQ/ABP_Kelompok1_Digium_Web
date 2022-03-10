@@ -13,7 +13,7 @@ class TransactionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,22 @@ class TransactionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if($this->isMethod('post')){
+            $rules = [
+                'user_id' => ['required', 'exists:users,id'],
+                'museum_id' => ['required', 'exists:museum,id'],
+                'total_price' => ['required'],
+                'qty' => ['required']
+            ];
+        } else {
+            $rules = [
+                'user_id' => ['exists:users,id'],
+                'museum_id' => ['exists:museum,id'],
+                'total_price' => [],
+                'qty' => []
+            ];
+        }
+
+        return $rules;
     }
 }

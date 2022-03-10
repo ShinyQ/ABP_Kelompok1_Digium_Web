@@ -13,7 +13,7 @@ class MuseumRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,28 @@ class MuseumRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if($this->isMethod('post')){
+            $rules = [
+                'name' => ['required', 'string'],
+                'background' => ['required', 'string'],
+                'panorama' => ['required', 'string'],
+                'description' => ['required', 'text'],
+                'location' => ['required', 'string'],
+                'phone' => ['required', 'string'],
+                'coordinate' => ['required', 'point']
+            ];
+        } else {
+            $rules = [
+                'name' => ['string'],
+                'background' => ['string'],
+                'panorama' => ['string'],
+                'description' => ['text'],
+                'location' => ['string'],
+                'phone' => ['string'],
+                'coordinate' => ['point']
+            ];
+        }
+
+        return $rules;
     }
 }

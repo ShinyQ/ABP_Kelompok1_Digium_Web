@@ -13,7 +13,7 @@ class GalleryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,18 @@ class GalleryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if($this->isMethod('post')){
+            $rules = [
+                'museum_id' => ['required', 'exists:museum,id'],
+                'photo' => ['required', 'string']
+            ];
+        } else {
+            $rules = [
+                'museum_id' => ['exists:museum,id'],
+                'photo' => ['string']
+            ];
+        }
+
+        return $rules;
     }
 }
