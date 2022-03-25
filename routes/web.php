@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/login', [UserController::class, 'view_login']);
+    Route::post('/login', [UserController::class, 'login']);
+    Route::get('/logout', [UserController::class, 'logout']);
+    Route::get('/profile', [UserController::class, 'profile']);
+});
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
