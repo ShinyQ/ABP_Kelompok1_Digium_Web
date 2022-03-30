@@ -27,9 +27,18 @@
                     </div>
 
                     <div class="card card-primary">
-                        <div class="card-header"><h4>Login</h4></div>
-
+                        <div class="card-header"><h4>Login Admin</h4></div>
                         <div class="card-body">
+                            @if (session()->get('error'))
+                                <div class="alert alert-danger alert-dismissible show fade">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                            <span>&times;</span>
+                                        </button>
+                                        {{ session()->get('error') }}
+                                    </div>
+                                </div>
+                            @endif
                             <form method="POST" action="{{ url('/user/login') }}" class="needs-validation" novalidate="">
                                 @csrf
                                 <div class="form-group">

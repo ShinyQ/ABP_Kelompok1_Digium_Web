@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone');
             $table->date('year_built')->nullable();
-            $table->point('coordinate');
+            $table->float('latitude')->nullable();
+            $table->float('longitude')->nullable();
             $table->integer('price')->nullable();
             $table->timestamps();
         });

@@ -52,102 +52,43 @@
             <div class="main-sidebar">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href={{ url('/') }}>Digium</a>
+                        <a href={{ url('dashboard') }}>Digium</a>
                     </div>
 
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">DG</a>
+                        <a href="{{ url('dashboard') }}">DG</a>
                     </div>
 
                     <ul class="sidebar-menu">
                             <li class="menu-header">Menu Utama</li>
-                            <li  class="{{ Request::is('/dashboard') ? 'active' : '' }}">
+                            <li  class="{{ Request::is('dashboard') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('/dashboard') }}">
                                     <i class="fas fa-chart-bar"></i>
                                     <span>Halaman Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="{{ Request::is('admin/user') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ url('admin/user') }}">
+                            <li class="{{ Request::is('user') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ url('user') }}">
                                     <i class="fas fa-users"></i>
                                     <span>Daftar Pengguna</span>
                                 </a>
                             </li>
-{{--                        @if (auth()->user()->role == 'super_user')--}}
-{{--                            <li class="menu-header">Menu Utama</li>--}}
-{{--                            <li  class="{{ Request::is('/') ? 'active' : '' }}">--}}
-{{--                                <a class="nav-link" href="{{ url('/') }}">--}}
-{{--                                    <i class="fas fa-chart-bar"></i>--}}
-{{--                                    <span>Halaman Dashboard</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
 
-{{--                            <li class="{{ Request::is('admin/user') ? 'active' : '' }}">--}}
-{{--                                <a class="nav-link" href="{{ url('admin/user') }}">--}}
-{{--                                    <i class="fas fa-users"></i>--}}
-{{--                                    <span>Daftar Pengguna</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
+                            <li class="menu-header">Menu Museum</li>
+                            <li  class="{{ Request::is('/dashboard') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ url('/dashboard') }}">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Halaman Museum</span>
+                                </a>
+                            </li>
 
-{{--                            <li class="menu-header">Menu Inventaris</li>--}}
-{{--                            <li class={{ Request::is('admin/item') ? 'active' : '' }}>--}}
-{{--                                <a class="nav-link" href="{{ url('admin/item') }}">--}}
-{{--                                    <i class="fas fa-box"></i>--}}
-{{--                                    <span>Inventaris Barang</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-
-{{--                            <li class={{ Request::is('admin/transaction') ? 'active' : '' }}>--}}
-{{--                                <a class="nav-link" href="{{ url('admin/transaction') }}">--}}
-{{--                                    <i class="fas fa-book"></i>--}}
-{{--                                    <span>Peminjaman Barang</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-
-{{--                            <li class={{ Request::is('admin/request') ? 'active' : '' }}>--}}
-{{--                                <a class="nav-link" href="{{ url('admin/request') }}">--}}
-{{--                                    <i class="fas fa-comment"></i>--}}
-{{--                                    <span>Permintaan Barang</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        @elseif(auth()->user()->role == 'user')--}}
-{{--                            <li class="menu-header">Menu Peminjaman</li>--}}
-{{--                            <li class={{ Request::is('item') ? 'active' : '' }}>--}}
-{{--                                <a class="nav-link" href="{{ url('item') }}">--}}
-{{--                                    <i class="fas fa-box"></i>--}}
-{{--                                    <span>Daftar Inventaris</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-
-{{--                            <li class={{ Request::is('transaction') ? 'active' : '' }}>--}}
-{{--                                <a class="nav-link" href="{{ url('transaction') }}">--}}
-{{--                                    <i class="fas fa-book"></i>--}}
-{{--                                    <span>Halaman Peminjaman</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-
-{{--                            <li class={{ Request::is('request') ? 'active' : '' }}>--}}
-{{--                                <a class="nav-link" href="{{ url('request') }}">--}}
-{{--                                    <i class="fas fa-comment"></i>--}}
-{{--                                    <span>Permintaan Barang</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        @else--}}
-{{--                            <li class="menu-header">Menu Peminjaman</li>--}}
-{{--                            <li class={{ Request::is('/') ? 'active' : '' }}>--}}
-{{--                                <a class="nav-link" href="{{ url('/') }}">--}}
-{{--                                    <i class="fas fa-box"></i>--}}
-{{--                                    <span>Daftar Inventaris</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li class={{ Request::is('transaction') ? 'active' : '' }}>--}}
-{{--                                <a class="nav-link" href="{{ url('transaction') }}">--}}
-{{--                                    <i class="fas fa-book"></i>--}}
-{{--                                    <span>Halaman Peminjaman</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        @endif--}}
+                            <li class="{{ Request::is('/user') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ url('user') }}">
+                                    <i class="fas fa-users"></i>
+                                    <span>Halaman Transaksi</span>
+                                </a>
+                            </li>
                     </ul>
                 </aside>
             </div>

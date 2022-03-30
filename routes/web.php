@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MuseumController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('test', function () {
+    return \App\Models\User::with(
+        'transaction:id,user_id,total_price,qty',
+        'transaction.transaction_item:id,transaction_id,qr_code'
+    )->get();
+});
+
 Route::group(['prefix' => 'user'], function () {
     Route::get('/login', [UserController::class, 'view_login']);
     Route::post('/login', [UserController::class, 'login']);
     Route::get('/logout', [UserController::class, 'logout']);
-    Route::get('/profile', [UserController::class, 'profile']);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::middleware(['superuser'])->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('user', [UserController::class, 'index']);
+    Route::resource('museum', MuseumController::class);
+});

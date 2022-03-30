@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function view_login(){
         if (session()->get('user')){
-            return redirect()->back();
+            return redirect('dashboard');
         }
 
         return view('login');
@@ -31,7 +31,15 @@ class UserController extends Controller
 
     public function login(Request $request){
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
+            $user = Auth::user();
+
+            if($user->role != 'superuser'){
+                return redirect()->back()->with('error', 'Email Atau Password Anda Salah');
+            }
+
             request()->session()->put('user', Auth::user());
+        } else {
+            return redirect()->back()->with('error', 'Email Atau Password Anda Salah');
         }
 
         return redirect('dashboard');
