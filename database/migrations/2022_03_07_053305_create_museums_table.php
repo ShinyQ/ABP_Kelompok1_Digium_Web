@@ -21,9 +21,9 @@ return new class extends Migration
             $table->text('description');
             $table->string('address');
             $table->string('phone');
-            $table->date('year_built')->nullable();
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();
+            $table->string('year_built')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->integer('price')->nullable();
             $table->timestamps();
         });
