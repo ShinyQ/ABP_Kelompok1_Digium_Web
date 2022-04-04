@@ -32,7 +32,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>User Name</th>
+                            <th>Transaction ID</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Status</th>
@@ -40,21 +40,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($transactions as $key => $tran)
+                        @foreach ($data as $key => $item)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $tran->user->name }}</td>
-                            <td>{{ $tran->total_price }}</td>
-                            <td>{{ $tran->qty }}</td>
-                            @if ($tran->status==='Paid')
-                            <td class="badge rounded-pill bg-success text-light">{{ $tran->status }}</td>
-                            @elseif ($tran->status==='Waiting Payment')
-                            <td class="badge rounded-pill bg-warning text-dark">{{ $tran->status }}</td>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->total_price }}</td>
+                            <td>{{ $item->qty }}</td>
+                            @if ($item->status==='Paid')
+                            <td class="badge rounded-pill bg-success text-light">{{ $item->status }}</td>
+                            @elseif ($item->status==='Waiting Payment')
+                            <td class="badge rounded-pill bg-warning text-dark">{{ $item->status }}</td>
                             @else
-                            <td class="badge rounded-pill bg-danger text-light">{{ $tran->status }}</td>
+                            <td class="badge rounded-pill bg-danger text-light">{{ $item->status }}</td>
                             @endif
                             <td>
-                                <a href="transactiondetail?id={{ $tran->id }}"
+                                <a href="transactiondetail?id={{ $item->id }}"
                                     class="btn btn-outline-primary">Detail</a>
                             </td>
                         </tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\TransactionItem;
 
 class TransactionController extends Controller
 {
@@ -13,7 +14,12 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = \App\Models\Transaction::with(
+            'user',
+            'transaction_item:id,transaction_id,qr_code'
+        )->get();
+        $title = 'Transaction';
+        return view('transaction.index', compact('title', 'transactions'));
     }
 
     /**
@@ -80,5 +86,13 @@ class TransactionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function detail(Request $request){
+        $data = TransactionItem::where('transaction_id',$request->id)->get();
+        $title = 'Transaction Item';
+        $ret = array('title', 'data');
+        // return $data[0]->name;
+        return view('transaction.detail', compact($ret));   
     }
 }
