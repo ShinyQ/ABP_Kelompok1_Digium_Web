@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MuseumController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +21,18 @@ Route::get('/', function () {
 });
 
 Route::get('test', function () {
-    return \App\Models\User::with(
-        'transaction:id,user_id,total_price,qty',
-        'transaction.transaction_item:id,transaction_id,qr_code'
+    $transactions = \App\Models\Transaction::with(
+        'user',
+        'transaction_item:id,transaction_id,qr_code'
+    )->get();
+    $title = 'Transaction';
+    return view('transaction.index', compact('title', 'transactions'));
+    // return $transactions;
+}); 
+Route::get('data', function () {
+    return \App\Models\Transaction::with(
+        'user',
+        'transaction_item:id,transaction_id,qr_code'
     )->get();
 });
 
@@ -35,5 +45,9 @@ Route::group(['prefix' => 'user'], function () {
 Route::middleware(['superuser'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('user', [UserController::class, 'index']);
+    Route::get('userlog', [UserController::class, 'log']);
+    Route::get('userdetail', [UserController::class, 'detail']);
+    Route::get('transactions', [TransactionController::class, 'index']);
+    Route::get('transactiondetail', [TransactionController::class, 'detail']);
     Route::resource('museum', MuseumController::class);
 });
