@@ -33,10 +33,9 @@ class UserRequest extends FormRequest
                 'email' => ['required', 'email', 'unique:users'],
                 'password' => ['required']
             ];
-        } else {
+        } else  {
             $rules = [
                 'email' => ['required', 'email'],
-                'password' => ['required']
             ];
         }
 

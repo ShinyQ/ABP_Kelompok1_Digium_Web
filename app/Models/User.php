@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'email_verified_at',
+        'remember_token'
     ];
 
     /**
@@ -41,6 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getUserId(){
+        return auth()->guard('api')->user()->id;
+    }
 
     public function transaction(){
         return $this->hasMany(Transaction::class, 'user_id', 'id');

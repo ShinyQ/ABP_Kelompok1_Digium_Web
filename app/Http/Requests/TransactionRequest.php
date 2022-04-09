@@ -25,9 +25,7 @@ class TransactionRequest extends FormRequest
     {
         if($this->isMethod('post')){
             $rules = [
-                'user_id' => ['required', 'exists:users,id'],
-                'museum_id' => ['required', 'exists:museum,id'],
-                'total_price' => ['required'],
+                'museum_id' => ['required', 'exists:museums,id'],
                 'qty' => ['required']
             ];
         } else {

@@ -9,5 +9,14 @@ class Museum extends Model
 {
     use HasFactory;
 
-    public $fillable = ['name', 'photo'];
+    public $fillable =
+        [
+            'name', 'photo', 'total_price',
+            'background', 'panorama', 'description',
+            'phone', 'year_built', 'latitude', 'longitude'
+        ];
+
+    public function gallery(){
+        return $this->hasMany(Gallery::class, 'museum_id', 'id');
+    }
 }

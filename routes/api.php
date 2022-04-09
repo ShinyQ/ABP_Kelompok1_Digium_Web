@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\MuseumController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +21,13 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('register', [UserController::class, 'register']);
     Route::get('profile', [UserController::class, 'profile'])->middleware('user');
     Route::get('logout', [UserController::class, 'logout']);
+});
+
+Route::group(['prefix' => 'museum'], function () {
+    Route::get('/', [MuseumController::class, 'index']);
+    Route::get('/{id}', [MuseumController::class, 'show']);
+});
+
+Route::group(['middleware' => 'user'], function() {
+    Route::apiResource('transaction', TransactionController::class)->only('store', 'index', 'show', 'update');
 });

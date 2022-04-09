@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Museum;
 use Exception;
 use Api;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,6 +19,7 @@ class MuseumController extends Controller
         $this->code = 200;
         $this->response = [];
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,9 +28,31 @@ class MuseumController extends Controller
     public function index(Request $request)
     {
         try {
+            $response = Museum::query();
 
+            if($request->has('search')){
+                $response = $response->where('name', 'like', '%'. $request->query('search'). '%');
+            }
+
+            if($request->has('top')) {
+                $response = $response->take(3);
+            }
+
+            if($request->has('random')) {
+                $response = $response->inRandomOrder()->limit($request->query('random'));
+            }
+
+            if($request->has('start_price')) {
+                $response = $response->whereBetween('price', [
+                    $request->query('start_price'),
+                    $request->query('end_price')
+                ]);
+            }
+
+            $this->response = Api::pagination($response);
         } catch (Exception $e){
-
+            $this->code = 500;
+            $this->response = $e->getMessage();
         }
 
         return Api::apiRespond($this->code, $this->response);
@@ -42,9 +67,14 @@ class MuseumController extends Controller
     public function show($id)
     {
         try {
-
+            $this->response = Museum::with('gallery')->findOrFail($id);
         } catch (Exception $e){
-
+            if($e instanceof ModelNotFoundException){
+                $this->code = 404;
+            } else {
+                $this->code = 500;
+                $this->response = $e->getMessage();
+            }
         }
 
         return Api::apiRespond($this->code, $this->response);

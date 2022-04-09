@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
@@ -18,6 +19,42 @@ class UserController extends Controller
         $this->response = [];
     }
 
+    public function generate_user($user){
+        $success['user'] = $user;
+        $success['token'] = $user->createToken('digimu_abp')->accessToken;
+
+        return $success;
+    }
+
+    public function login(UserRequest $request)
+    {
+        if($request->remember_token){
+            $data = User::where('email', $request->email)->where('remember_token', $request->remember_token)->first();
+
+            if(is_null($data)){
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'photo' => $request->avatar,
+                    'remmber_token' => $request->remember_token,
+                    'email_verified_at' => Carbon::now(),
+                ]);
+            } else if(Auth::loginUsingId($data->id)){
+                $user = Auth::user();
+            }
+
+            $this->response = $this->generate_user($user);
+        } else if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            $this->response = $this->generate_user($user);
+        } else {
+            $this->code = 401;
+        }
+
+        return Api::apiRespond($this->code, $this->response);
+    }
+
+
     public function register(UserRequest $request){
         try {
             $data = $request->validated();
@@ -32,28 +69,6 @@ class UserController extends Controller
         return Api::apiRespond($this->code, $this->response);
     }
 
-    public function login(UserRequest $request){
-        try {
-            $request = $request->validated();
-
-            if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-                $user = Auth::user();
-
-                $response['user'] = $user;
-                $response['token'] = $user->createToken('digiumdipl')->accessToken;
-            } else {
-                $this->code = 401;
-                $response = ["Email Atau Password Anda Salah"];
-            }
-
-            $this->response = $response;
-        } catch (Exception $e) {
-            $this->code = 500;
-            $this->response = $e->getMessage();
-        }
-
-        return Api::apiRespond($this->code, $this->response);
-    }
 
     public function profile(){
         try {

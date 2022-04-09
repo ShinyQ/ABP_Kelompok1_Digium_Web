@@ -28,7 +28,6 @@ class GoogleProviderController extends Controller
 
         if($auth_user){
             Auth::loginUsingId($auth_user->id);
-            request()->session()->put('user', Auth::user());
 
             return redirect('/')->with('success', 'Sukses Melakukan Login');
         }
@@ -48,7 +47,11 @@ class GoogleProviderController extends Controller
                 'email_verified_at' => Carbon::now(),
             ]);
         } else {
-            $user->update(['photo' => $providerUser->avatar]);
+            $user->update([
+                'name' => $providerUser->name,
+                'email' => $providerUser->email,
+                'photo' => $providerUser->avatar
+            ]);
         }
 
         return $user;
