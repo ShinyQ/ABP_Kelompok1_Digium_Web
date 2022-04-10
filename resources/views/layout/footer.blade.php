@@ -22,6 +22,8 @@
 <!-- Page Specific JS File -->
 <script src="{{ asset('assets/js/page/components-table.js') }}"></script>
 
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
 @stack('scripts')
 </body>
 

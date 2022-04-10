@@ -21,7 +21,8 @@ class TransactionItemFactory extends Factory
         return [
             'transaction_id' => Transaction::all()->random()->id,
             'name' => $this->faker->name(),
-            'qr_code' => 'https://picsum.photos/300/300?nocache='. microtime(),
+            'qr_code' => 'https://picsum.photos/300/300?nocache=' . microtime(),
+            'status' => $this->faker->randomElement(['Waiting', 'Verified']),
             'created_at' => Carbon::now()->timestamp,
             'updated_at' => Carbon::now()->timestamp,
         ];

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('transaction_id')->constrained();
             $table->string('name');
             $table->string('qr_code');
+            $table->string('status');
             $table->timestamps();
         });
     }
