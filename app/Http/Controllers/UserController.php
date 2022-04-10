@@ -33,8 +33,8 @@ class UserController extends Controller
     public function detail(Request $request){
         $data = User::find($request->id);
         $title = 'Profile';
-        $ret = array('title', 'data');
-        return view('user.detail', compact($ret));
+
+        return view('user.detail', compact('title', 'data'));
     }
 
     public function login(Request $request){
@@ -56,7 +56,7 @@ class UserController extends Controller
     public function log(Request $request){
         $data = Transaction::where('user_id',$request->id)->get();
         $title = 'User Transaction';
-        // return $data[0]->name;
+
         return view('user.log', compact('title', 'data'));
     }
 

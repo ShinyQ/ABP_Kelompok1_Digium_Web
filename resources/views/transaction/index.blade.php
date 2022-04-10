@@ -6,24 +6,6 @@
     </div>
 </div>
 
-@if ($message = Session::get('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ $message }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endif
-
-@if ($message = Session::get('failed'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ $message }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endif
-
 <div class="section-body">
     <div class="card">
         <div class="card-body">
@@ -46,15 +28,17 @@
                             <td>{{ $tran->user->name }}</td>
                             <td>{{ $tran->total_price }}</td>
                             <td>{{ $tran->qty }}</td>
-                            @if ($tran->status==='Paid')
-                            <td class="badge rounded-pill bg-success text-light">{{ $tran->status }}</td>
-                            @elseif ($tran->status==='Waiting Payment')
-                            <td class="badge rounded-pill bg-warning text-dark">{{ $tran->status }}</td>
+
+                            @if ($tran->status =='Paid')
+                                <td class="badge badge-success">{{ $tran->status }}</td>
+                            @elseif ($tran->status == 'Waiting Payment')
+                                <td class="badge badge-warning">{{ $tran->status }}</td>
                             @else
-                            <td class="badge rounded-pill bg-danger text-light">{{ $tran->status }}</td>
+                                <td class="badge badge-danger">{{ $tran->status }}</td>
                             @endif
+
                             <td>
-                                <a href="transactiondetail?id={{ $tran->id }}"
+                                <a href="transaction/{{ $tran->id }}"
                                     class="btn btn-outline-primary">Detail</a>
                             </td>
                         </tr>

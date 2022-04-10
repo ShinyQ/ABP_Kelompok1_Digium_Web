@@ -82,14 +82,14 @@
 
                         <li class="menu-header">Menu Museum</li>
                         <li class="{{ Request::is('/dashboard') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('/dashboard') }}">
+                            <a class="nav-link" href="{{ url('museum') }}">
                                 <i class="fas fa-building"></i>
                                 <span>Halaman Museum</span>
                             </a>
                         </li>
 
                         <li class="{{ Request::is('/user') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('transactions') }}">
+                            <a class="nav-link" href="{{ url('transaction') }}">
                                 <i class="fas fa-book"></i>
                                 <span>Halaman Transaksi</span>
                             </a>
