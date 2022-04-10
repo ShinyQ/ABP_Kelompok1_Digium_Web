@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MuseumController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionItemController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,16 +25,16 @@ Route::get('/', function () {
 Route::get('test', function () {
     $transactions = \App\Models\Transaction::with(
         'user',
-        'transaction_item:id,transaction_id,qr_code'
+        'transaction_item'
     )->get();
     $title = 'Transaction';
     return view('transaction.index', compact('title', 'transactions'));
     // return $transactions;
-}); 
+});
 Route::get('data', function () {
     return \App\Models\Transaction::with(
         'user',
-        'transaction_item:id,transaction_id,qr_code'
+        'transaction_item'
     )->get();
 });
 
@@ -49,5 +51,8 @@ Route::middleware(['superuser'])->group(function () {
     Route::get('userdetail', [UserController::class, 'detail']);
     Route::get('transactions', [TransactionController::class, 'index']);
     Route::get('transactiondetail', [TransactionController::class, 'detail']);
+    Route::get('verification', [TransactionController::class, 'verify']);
     Route::resource('museum', MuseumController::class);
+    Route::post('verify', [TransactionItemController::class, 'verify']);
+    Route::get('verify/{code}', [TransactionItemController::class, 'show']);
 });

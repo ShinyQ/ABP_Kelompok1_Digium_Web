@@ -88,11 +88,18 @@ class TransactionController extends Controller
         //
     }
 
-    public function detail(Request $request){
-        $data = TransactionItem::where('transaction_id',$request->id)->get();
+    public function detail(Request $request)
+    {
+        $data = TransactionItem::where('transaction_id', $request->id)->get();
         $title = 'Transaction Item';
         $ret = array('title', 'data');
         // return $data[0]->name;
-        return view('transaction.detail', compact($ret));   
+        return view('transaction.detail', compact($ret));
+    }
+
+    public function verify(Request $request)
+    {
+        $title = "Transaction Verification";
+        return view('transaction.verify', compact('title'));
     }
 }
