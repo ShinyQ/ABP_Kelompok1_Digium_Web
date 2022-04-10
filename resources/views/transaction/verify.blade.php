@@ -68,12 +68,6 @@
 @push('scripts')
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
         function onScanSuccess(decodedText, decodedResult) {
             html5QrcodeScanner.pause(true)
             $.ajax({
