@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MuseumController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionItemController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,9 +31,11 @@ Route::group(['prefix' => 'user'], function () {
 Route::middleware(['superuser'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('user', [UserController::class, 'index']);
-    Route::get('userlog', [UserController::class, 'log']);
-    Route::get('userdetail', [UserController::class, 'detail']);
-
     Route::resource('transaction', TransactionController::class);
     Route::resource('museum', MuseumController::class);
+
+    Route::get('verification', [TransactionController::class, 'verify']);
+    Route::resource('museum', MuseumController::class);
+    Route::post('verify', [TransactionItemController::class, 'verify']);
+    Route::get('verify/{code}', [TransactionItemController::class, 'show']);
 });
