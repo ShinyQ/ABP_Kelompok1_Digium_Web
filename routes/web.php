@@ -23,16 +23,16 @@ Route::get('/', function () {
 Route::get('test', function () {
     $transactions = \App\Models\Transaction::with(
         'user',
-        'transaction_item:id,transaction_id,qr_code'
+        'transaction_item'
     )->get();
     $title = 'Transaction';
     return view('transaction.index', compact('title', 'transactions'));
     // return $transactions;
-}); 
+});
 Route::get('data', function () {
     return \App\Models\Transaction::with(
         'user',
-        'transaction_item:id,transaction_id,qr_code'
+        'transaction_item'
     )->get();
 });
 
