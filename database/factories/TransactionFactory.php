@@ -19,13 +19,27 @@ class TransactionFactory extends Factory
      */
     public function definition()
     {
+        $qty = rand(1, 10);
+        $status = $this->faker->randomElement(['Waiting Verification', 'Waiting Payment', 'Paid', 'Cancelled']);
+        $receipt = null;
+
+        if ($status == 'Waiting Verification'){
+            $receipt =  $this->faker->randomElement([
+                'https://pbs.twimg.com/media/Czx7juDUcAAhOxg.jpg',
+                'https://www.itworks.id/wp-content/uploads/2021/05/Struk-ATM-Link.jpg',
+                'https://pbs.twimg.com/media/DDIFvpdVwAAhrhb.jpg',
+                'https://pbs.twimg.com/media/Dme6YrEVsAIR5eO.jpg'
+            ]);
+        }
+
         return [
             'user_id' => User::get()->random()->id,
             'museum_id'=> Museum::get()->random()->id,
-            'total_price' => $this->faker->numberBetween($min = 15000, $max = 50000),
-            'qty' => rand(1,20),
-            'status'=> $this->faker->randomElement(['Waiting Payment', 'Paid', 'Cancelled']),
-            'created_at' => Carbon::now()->timestamp,
+            'total_price' => $this->faker->numberBetween(15000, 12500) * $qty,
+            'qty' => $qty,
+            'receipt' => $receipt,
+            'status'=> $status,
+            'created_at' => Carbon::now()->addDays(rand(1, 7)),
             'updated_at' => Carbon::now()->timestamp,
         ];
     }

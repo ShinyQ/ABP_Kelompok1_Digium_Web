@@ -35,8 +35,9 @@ Route::middleware(['superuser'])->group(function () {
     Route::get('verification', [TransactionController::class, 'verify']);
     Route::post('verify', [TransactionItemController::class, 'verify']);
     Route::get('verify/{code}', [TransactionItemController::class, 'show']);
+    Route::get('transaction_verification/{id}', [TransactionController::class, 'update']);
 
     Route::resource('transaction', TransactionController::class);
-    Route::get('transaction_verification/{id}', [TransactionController::class, 'update']);
     Route::resource('museum', MuseumController::class);
+
 });
