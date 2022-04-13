@@ -44,7 +44,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Receipt</th>
-                            <th>Museum</th>
+                            <th style="width: 15%">Museum</th>
                             <th>Nama</th>
                             <th>Total Price</th>
                             <th width="3%">Qty</th>
@@ -57,11 +57,16 @@
                         <tr>
                             <td>{{ $tran->id }}</td>
                             @if(!is_null($tran->receipt))
-                                <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="120px"></td>
+                                @if(substr($tran->receipt, 0, 4) == 'http')
+                                    <td><img class="zoom" src="{{ $tran->receipt }}" alt="" width="120px"></td>
+                                @else
+                                    <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="120px"></td>
+
+                                @endif
                             @else
-                                <td>Belum Ada Resi</td>
+                                <td>-</td>
                             @endif
-                            <td>{{ $tran->museum->name }}</td>
+                            <td style="width: 15%">{{ $tran->museum->name }}</td>
                             <td>{{ $tran->user->name }}</td>
                             <td>{{ 'Rp' . number_format($tran->total_price, 2, ',', '.') }}</td>
                             <td width="3%">{{ $tran->qty }}</td>
@@ -79,7 +84,7 @@
                             <td>
                                 <a href="/transaction/{{ $tran->id }}" class="btn btn-outline-primary">Detail</a>
                                 @if ($tran->status != 'Paid' && $tran->status != 'Cancelled')
-                                    <a href="/transaction_verification/{{ $tran->id }}" class="btn btn-primary">Verifikasi Transaksi</a>
+                                    <a href="/transaction_verification/{{ $tran->id }}" class="btn btn-primary">Verifikasi</a>
                                 @endif
                             </td>
                         </tr>

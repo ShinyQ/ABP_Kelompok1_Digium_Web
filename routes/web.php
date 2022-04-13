@@ -17,9 +17,7 @@ use App\Http\Controllers\TransactionItemController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'landing']);
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('/login', [UserController::class, 'view_login']);
@@ -29,14 +27,16 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::middleware(['superuser'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('profile', [UserController::class, 'profile']);
     Route::get('user', [UserController::class, 'index']);
     Route::get('user/{id}', [UserController::class, 'detail']);
     Route::get('user/update_role/{id}/{role}', [UserController::class, 'update_role']);
     Route::get('verification', [TransactionController::class, 'verify']);
     Route::post('verify', [TransactionItemController::class, 'verify']);
     Route::get('verify/{code}', [TransactionItemController::class, 'show']);
+    Route::get('transaction_verification/{id}', [TransactionController::class, 'update']);
 
     Route::resource('transaction', TransactionController::class);
-    Route::get('transaction_verification/{id}', [TransactionController::class, 'update']);
     Route::resource('museum', MuseumController::class);
+
 });

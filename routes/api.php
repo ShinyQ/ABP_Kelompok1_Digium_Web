@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MuseumController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TransactionController;
-
+use App\Http\Controllers\Api\TransactionItemController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,11 +15,6 @@ use App\Http\Controllers\Api\TransactionController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::post('test', function (\Illuminate\Http\Request $request){
-    return $request->transaction_item;
-});
-
 Route::group(['prefix' => 'user'], function () {
     Route::post('login', [UserController::class, 'login']);
     Route::post('register', [UserController::class, 'register']);
@@ -35,4 +30,6 @@ Route::group(['prefix' => 'museum'], function () {
 Route::group(['middleware' => 'user'], function() {
     Route::apiResource('transaction', TransactionController::class)->only('store', 'index', 'show', 'update');
     Route::post('transaction_receipt/{id}', [TransactionController::class, 'add_receipt']);
+    Route::get('transaction_item/{id}', [TransactionItemController::class, 'show']);
+
 });

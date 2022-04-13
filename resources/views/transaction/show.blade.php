@@ -18,11 +18,11 @@
                             <h4>Transaction Item ID #{{ $item->id }}</h4>
                         </div>
                         <div class="row card-body">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <img src="{{ asset('assets/images/transaction/'. $item->transaction_id .'/'. $item->qr_code) }}" width="100px" alt="">
 
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-8">
                                 <p style="font-size: 14px" class="mt-4">
                                     <b>Nama</b> : {{ $item->name }} <br>
                                     <b>Status</b> : {{ $item->status }}

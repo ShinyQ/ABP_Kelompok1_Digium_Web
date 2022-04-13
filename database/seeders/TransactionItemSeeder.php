@@ -19,31 +19,35 @@ class TransactionItemSeeder extends Seeder
             [
                 'transaction_id' => "1",
                 'name' => 'Kurniadi Ahmad Wijaya',
-                'qr_code' => 'assets\images\transaction\1\1digium7.png'
+                'qr_code' => '1digium7.png',
+                'status' => 'Waiting'
             ],
 
             [
                 'transaction_id' => "1",
                 'name' => 'Michael Putera Wardana',
-                'qr_code' => 'assets\images\transaction\1\1digium75.png'
+                'qr_code' => '1digium75.png'
             ],
 
             [
                 'transaction_id' => "1",
                 'name' => 'Imam Rafiif',
-                'qr_code' => 'assets\images\transaction\1\1digium76.png'
+                'qr_code' => '1digium76.png',
+                'status' => 'Waiting'
             ],
 
             [
                 'transaction_id' => "1",
                 'name' => 'Jerry Cahyo Setiawan',
-                'qr_code' => 'assets\images\transaction\1\1digium81.png'
+                'qr_code' => '1digium81.png',
+                'status' => 'Waiting'
             ],
 
             [
                 'transaction_id' => "1",
                 'name' => 'Rara Cloud Engineer',
-                'qr_code' => 'assets\images\transaction\1\1digium119.png'
+                'qr_code' => '1digium119.png',
+                'status' => 'Waiting'
             ],
         ];
         TransactionItem::insert($data);

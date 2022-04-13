@@ -2199,7 +2199,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 .pricing-table .plan-block {
   background: #ffffff;
   border-radius: 5px;
-  padding: 4.8rem 4rem 5.4rem;
+  padding: 4.8rem 4rem 2.4rem;
   margin-bottom: 4.8rem;
 }
 
@@ -2399,7 +2399,7 @@ a:hover {
 }
 
 .owl-carousel .carousel-item .item-kicker {
-  color: #9A5053;
+  color: #18C5FA;
   display: block;
   font-size: .8em;
   font-weight: 600;
