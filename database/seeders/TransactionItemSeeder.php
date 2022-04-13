@@ -15,6 +15,38 @@ class TransactionItemSeeder extends Seeder
      */
     public function run()
     {
+        $data = [
+            [
+                'transaction_id' => "1",
+                'name' => 'Kurniadi Ahmad Wijaya',
+                'qr_code' => 'assets\images\transaction\1\1digium7.png'
+            ],
+
+            [
+                'transaction_id' => "1",
+                'name' => 'Michael Putera Wardana',
+                'qr_code' => 'assets\images\transaction\1\1digium75.png'
+            ],
+
+            [
+                'transaction_id' => "1",
+                'name' => 'Imam Rafiif',
+                'qr_code' => 'assets\images\transaction\1\1digium76.png'
+            ],
+
+            [
+                'transaction_id' => "1",
+                'name' => 'Jerry Cahyo Setiawan',
+                'qr_code' => 'assets\images\transaction\1\1digium81.png'
+            ],
+
+            [
+                'transaction_id' => "1",
+                'name' => 'Rara Cloud Engineer',
+                'qr_code' => 'assets\images\transaction\1\1digium119.png'
+            ],
+        ];
+        TransactionItem::insert($data);
         TransactionItem::factory()->count(150)->create();
     }
 }

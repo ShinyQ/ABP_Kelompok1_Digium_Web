@@ -157,7 +157,7 @@
 
         <div class="features-list block-1-3 block-m-1-2 block-mob-full group">
 
-            <img src="{{ asset('assets/landing/images/main-menu.jpeg')}}" alt="" srcset="">
+            <img    ('assets/landing/images/main-menu.jpeg')}}" alt="" srcset="">
 
         </div> <!-- end features-list -->
 
