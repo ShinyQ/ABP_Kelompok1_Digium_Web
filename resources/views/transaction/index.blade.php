@@ -6,6 +6,35 @@
     </div>
 </div>
 
+<style>
+    .zoom {
+        transition: transform .2s; /* Animation */
+        margin: 0 auto;
+    }
+
+    .zoom:hover {
+        transform: scale(2.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+</style>
+
+@if ($message = Session::get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ $message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+@if ($message = Session::get('failed'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ $message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
 <div class="section-body">
     <div class="card">
         <div class="card-body">
@@ -13,10 +42,12 @@
                 <table id="dataTable" class="table-bordered table-md table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>User Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
+                            <th>ID</th>
+                            <th>Receipt</th>
+                            <th>Museum</th>
+                            <th>Nama</th>
+                            <th>Total Price</th>
+                            <th width="3%">Qty</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -24,22 +55,32 @@
                     <tbody>
                         @foreach ($transactions as $key => $tran)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $tran->id }}</td>
+                            @if(!is_null($tran->receipt))
+                                <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="120px"></td>
+                            @else
+                                <td>Belum Ada Resi</td>
+                            @endif
+                            <td>{{ $tran->museum->name }}</td>
                             <td>{{ $tran->user->name }}</td>
-                            <td>{{ $tran->total_price }}</td>
-                            <td>{{ $tran->qty }}</td>
+                            <td>{{ 'Rp' . number_format($tran->total_price, 2, ',', '.') }}</td>
+                            <td width="3%">{{ $tran->qty }}</td>
 
                             @if ($tran->status =='Paid')
                                 <td class="badge badge-success">{{ $tran->status }}</td>
                             @elseif ($tran->status == 'Waiting Payment')
+                                <td class="badge badge-secondary">{{ $tran->status }}</td>
+                            @elseif ($tran->status == 'Waiting Verification')
                                 <td class="badge badge-warning">{{ $tran->status }}</td>
                             @else
                                 <td class="badge badge-danger">{{ $tran->status }}</td>
                             @endif
 
                             <td>
-                                <a href="transaction/{{ $tran->id }}"
-                                    class="btn btn-outline-primary">Detail</a>
+                                <a href="/transaction/{{ $tran->id }}" class="btn btn-outline-primary">Detail</a>
+                                @if ($tran->status != 'Paid' && $tran->status != 'Cancelled')
+                                    <a href="/transaction_verification/{{ $tran->id }}" class="btn btn-primary">Verifikasi Transaksi</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

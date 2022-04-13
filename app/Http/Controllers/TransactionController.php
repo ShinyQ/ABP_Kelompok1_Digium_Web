@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\TransactionItem;
 use App\Models\Transaction;
+use GuzzleHttp\Client;
+use File;
 
 class TransactionController extends Controller
 {
@@ -19,42 +20,38 @@ class TransactionController extends Controller
     public function show($id)
     {
         $data = TransactionItem::where('transaction_id',$id)->get();
-        $title = 'Transaction Item';
+        $title = 'Transaction Item ID #'. $id;
 
         return view('transaction.show', compact('title','data'));
     }
 
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
-    }
-<<<<<<< HEAD
-=======
+        Transaction::where('id', $id)->update(['status' => 'Paid']);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+        $transaction_item = TransactionItem::where('transaction_id', $id)->get();
 
-    public function detail(Request $request)
-    {
-        $data = TransactionItem::where('transaction_id', $request->id)->get();
-        $title = 'Transaction Item';
-        $ret = array('title', 'data');
-        // return $data[0]->name;
-        return view('transaction.detail', compact($ret));
+        foreach ($transaction_item as $item){
+            $name = $id.'DIGIUM'.$item->id.'.png';
+            $path = 'assets/images/transaction/'. $id;
+
+            if (!is_dir('assets/images/transaction/'. $id)) {
+                mkdir($path, 0777, true);
+            }
+
+            $client = new Client();
+            $client->request('GET', 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='. $name, ['sink' => $name]);
+
+            File::move(public_path($name), public_path($path.'/'. $name));
+            TransactionItem::where('id', $item->id)->update(['qr_code' => $name]);
+        }
+
+        return redirect()->back()->with('success', 'Sukses verifikasi transaksi');
     }
 
-    public function verify(Request $request)
+    public function verify()
     {
         $title = "Transaction Verification";
         return view('transaction.verify', compact('title'));
     }
->>>>>>> 3f29c545865378a300f01d7d084ef5d793319e25
 }

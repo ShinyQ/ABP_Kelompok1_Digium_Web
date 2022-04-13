@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TransactionRequest;
 use App\Models\Museum;
 use App\Models\Transaction;
+use App\Models\TransactionItem;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Api;
@@ -61,7 +62,17 @@ class TransactionController extends Controller
             $data['user_id'] =  $this->user->getUserId();
             $data['total_price'] = Museum::findOrFail($data['museum_id'])->price * $data['qty'];
 
-            $this->response = Transaction::create($data);
+            $transaction = Transaction::create($data);
+            $transaction_item = $request->transaction_item;
+
+            foreach ($transaction_item as $data){
+                TransactionItem::create([
+                    'transaction_id' => $transaction->id,
+                    'name' => $data['name']
+                ]);
+            }
+
+            $this->response = $transaction;
         } catch (Exception $e){
             $this->code = 500;
             $this->response = $e->getMessage();
@@ -82,6 +93,33 @@ class TransactionController extends Controller
             $this->response = Transaction::with('transaction_item')
                 ->where('user_id', $this->user->getUserId())
                 ->findOrFail($id);
+        } catch (Exception $e){
+            if($e instanceof ModelNotFoundException){
+                $this->code = 404;
+            } else {
+                $this->code = 500;
+                $this->response = $e->getMessage();
+            }
+        }
+
+        return Api::apiRespond($this->code, $this->response);
+    }
+
+    public function add_receipt(Request $request, $id){
+        try {
+            if(isset($request->receipt)){
+                $name = $request->receipt->getClientOriginalName();
+
+                $request->receipt->move(public_path('assets/images/transaction/'. $id), $name);
+
+                Transaction::where('id', $id)->update([
+                    'receipt' => $name,
+                    'status'  => 'Waiting Verification'
+                ]);
+            } else {
+                $this->code = 400;
+                $this->response = "Resi harus di upload";
+            }
 
         } catch (Exception $e){
             if($e instanceof ModelNotFoundException){

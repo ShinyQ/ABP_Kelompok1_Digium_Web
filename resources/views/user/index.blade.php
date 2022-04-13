@@ -71,8 +71,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="/userdetail?id={{ $user->id }}" class="btn btn-outline-primary">Detail</a>
-                                <a href="/userlog?id={{ $user->id }}" class="btn btn-outline-warning">Log</a>
+                                <a href="/user/{{ $user->id }}" class="btn btn-outline-primary">Detail</a>
                             </td>
                         </tr>
                         @endforeach

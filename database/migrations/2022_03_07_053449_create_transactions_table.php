@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreignId('museum_id')->constrained();
             $table->integer('total_price');
             $table->integer('qty');
-            $table->enum('status', ['Waiting Payment', 'Paid', 'Cancelled']);
+            $table->string('receipt')->nullable();
+            $table->enum('status', ['Waiting Payment', 'Paid', 'Cancelled', 'Waiting Verification']);
             $table->timestamps();
         });
     }

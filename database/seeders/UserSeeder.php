@@ -16,11 +16,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(20)->create();
+        User::factory()->count(10)->create();
+
         $data = [
             [
                 'name' => "ADMIN",
-                'email' => "admin@krobot.my.id",
+                'email' => "admin@gmail.com",
                 'email_verified_at' => now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
             ],
 
         ];
+
         User::insert($data);
     }
 }

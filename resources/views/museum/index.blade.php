@@ -45,11 +45,10 @@
                     </table>
                 </div>
             </div>
-
-
         </div>
     </div>
 @endsection
+
 <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -58,49 +57,53 @@
                 <div class="form-group row mb-4">
                     <label class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input id="nama" type="text" name="nama" class="form-control">
+                        <input id="nama" type="text" name="nama" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="form-group row mb-4">
                     <label class="col-sm-2 col-form-label">Phone</label>
                     <div class="col-sm-10">
-                        <input id="phone" type="text" name="phone" class="form-control">
+                        <input id="phone" type="text" name="phone" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="form-group row mb-4">
                     <label class="col-sm-2 col-form-label">Tahun Berdiri</label>
                     <div class="col-sm-10">
-                        <input id="yearBuilt" type="text" name="yearBuilt" class="form-control">
+                        <input id="year_built" type="text" name="year_built" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="form-group row mb-4">
                     <label class="col-sm-2 col-form-label">Alamat</label>
                     <div class="col-sm-10">
-                        <textarea id="alamat" name="alamat" class="form-control"></textarea>
+                        <textarea id="alamat" name="alamat" class="form-control" style="height: 80px" disabled></textarea>
                     </div>
                 </div>
                 <div class="form-group row mb-4">
                     <label class="col-sm-2 col-form-label">Deskripsi</label>
                     <div class="col-sm-10">
-                        <textarea id="deskripsi" name="deskripsi" class="form-control"></textarea>
+                        <textarea id="deskripsi" name="deskripsi" class="form-control" style="height: 80px" disabled></textarea>
                     </div>
                 </div>
+
                 <div class="form-group row mb-4">
                     <label class="col-sm-2 col-form-label">Harga Satuan</label>
                     <div class="col-sm-10">
-                        <input id="harga" type="text" name="harga" class="form-control">
+                        <input id="harga" type="text" name="harga" class="form-control" disabled>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label"></label>
-                    <div class="col-sm-1">
-                        <input class="btn btn-success mb-3 text-center" type="submit" value="Simpan">
+                <div class="form-group row mb-4">
+                    <label class="col-sm-2 col-form-label">Lokasi</label>
+                    <div class="col-sm-10">
+                        <div id='map' style='width: 100%; height: 200px;'></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
 
 @push('scripts')
     <script>
@@ -112,15 +115,30 @@
                     type: 'GET',
                     url: `{{ url('museum') }}/${id}`,
                     success: (res) => {
-                        console.log(res.data)
+                        const numb = res.data.price
+                        const format = numb.toString().split('').reverse().join('');
+                        const convert = format.match(/\d{1,3}/g);
+                        const rupiah = 'Rp' + convert.join('.').split('').reverse().join('')
+
+                        mapboxgl.accessToken = 'pk.eyJ1Ijoic2hpbnlxMTEiLCJhIjoiY2ptY3d3OGxsMTA1dDNsbnl4OXJ1cHpkeCJ9.7fp_UEinaxDc5l8kOT6nBw';
+                        const map = new mapboxgl.Map({
+                            container: 'map',
+                            style: 'mapbox://styles/mapbox/satellite-streets-v11',
+                            center: [res.data.longitude, res.data.latitude],
+                            zoom: 16
+                        });
+
+                        const marker1 = new mapboxgl.Marker()
+                            .setLngLat([res.data.longitude, res.data.latitude])
+                            .addTo(map);
+
                         $('#titleModal').html('Detail Museum')
                         $('#nama').val(res.data.name);
                         $('#deskripsi').val(res.data.description);
                         $('#alamat').val(res.data.address);
-                        $('#harga').val(res.data.price);
+                        $('#harga').val(rupiah);
                         $('#phone').val(res.data.phone);
-                        $('#yearBuilt').val(res.data.yearBuilt);
-                        //$('#editForm').attr('action', '/obat/' + id);
+                        $('#year_built').val(res.data.year_built);
                         $('#detailModal').modal('show');
                     },
                     error: function(data) {

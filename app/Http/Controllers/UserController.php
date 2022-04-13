@@ -30,11 +30,17 @@ class UserController extends Controller
         return view('user.profile', compact('user', 'title'));
     }
 
-    public function detail(Request $request){
-        $data = User::find($request->id);
-        $title = 'Profile';
+    public function detail($id){
+        $data = Transaction::where('user_id', $id)->get();
+        $user = User::find($id);
+        $title = 'User Detail';
 
-        return view('user.detail', compact('title', 'data'));
+        return view('user.detail', compact('title', 'user', 'data'));
+    }
+
+    public function update_role($id, $role){
+        User::where('id', $id)->update(['role' => $role]);
+        return redirect()->back()->with('success', 'Sukses update role pengguna');
     }
 
     public function login(Request $request){
@@ -53,8 +59,8 @@ class UserController extends Controller
         return redirect('dashboard');
     }
 
-    public function log(Request $request){
-        $data = Transaction::where('user_id',$request->id)->get();
+    public function user_transaction($id){
+        $data = Transaction::where('user_id', $id)->get();
         $title = 'User Transaction';
 
         return view('user.log', compact('title', 'data'));

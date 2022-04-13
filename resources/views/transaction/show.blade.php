@@ -2,6 +2,9 @@
 @section('content')
     <div class="section-header">
         <div class="aligns-items-center d-inline-block">
+            <a href="{{ url('transaction') }}">
+                <i class="h5 fa fa-arrow-left"></i>
+            </a> &nbsp; &nbsp;
             <h1>{{ $title }}</h1>
         </div>
     </div>
@@ -9,15 +12,22 @@
     <div class="section-body">
         <div class="row mt-sm-4">
             @forelse ($data as $key => $item)
-                <div class="col-6">
+                <div class="col-4">
                     <div class="card ">
-                        <div class="card-header ">
-                            <h4>Transaction Details</h4>
+                        <div class="card-header">
+                            <h4>Transaction Item ID #{{ $item->id }}</h4>
                         </div>
-                        <div class="card-body" style="position:relative; left: 100px;">
-                            <p>Nama {{ $item->name }}</p>
-                            <p>Transaction ID {{ $item->transaction_id }}</p>
-                            <h1>QR YGY</h1>
+                        <div class="row card-body">
+                            <div class="col-md-5">
+                                <img src="{{ asset('assets/images/transaction/'. $item->transaction_id .'/'. $item->qr_code) }}" width="100px" alt="">
+
+                            </div>
+                            <div class="col-md-7">
+                                <p style="font-size: 14px" class="mt-4">
+                                    <b>Nama</b> : {{ $item->name }} <br>
+                                    <b>Status</b> : {{ $item->status }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

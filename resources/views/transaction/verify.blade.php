@@ -30,7 +30,7 @@
                 <div class="col-12 col-md-6 col-lg-6" style="text-align: center;margin-bottom: 20px;">
                     <div class="card">
                         <div class="card-body">
-                            <div id="reader" style="display: inline-block;"></div>
+                            <div style="width: 500; height: 800 " id="reader" style="display: inline-block;"></div>
                             <div class="empty"></div>
                             <div id="scanned-result"></div>
                         </div>
@@ -90,8 +90,8 @@
             "reader", {
                 fps: 10,
                 qrbox: {
-                    width: 500,
-                    height: 500
+                    width: 1000,
+                    height: 1000
                 }
             },
             /* verbose= */

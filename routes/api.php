@@ -16,6 +16,10 @@ use App\Http\Controllers\Api\TransactionController;
 |
 */
 
+Route::post('test', function (\Illuminate\Http\Request $request){
+    return $request->transaction_item;
+});
+
 Route::group(['prefix' => 'user'], function () {
     Route::post('login', [UserController::class, 'login']);
     Route::post('register', [UserController::class, 'register']);
@@ -30,4 +34,5 @@ Route::group(['prefix' => 'museum'], function () {
 
 Route::group(['middleware' => 'user'], function() {
     Route::apiResource('transaction', TransactionController::class)->only('store', 'index', 'show', 'update');
+    Route::post('transaction_receipt/{id}', [TransactionController::class, 'add_receipt']);
 });

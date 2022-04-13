@@ -81,17 +81,24 @@
                         </li>
 
                         <li class="menu-header">Menu Museum</li>
-                        <li class="{{ Request::is('/dashboard') ? 'active' : '' }}">
+                        <li class="{{ Request::is('museum') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ url('museum') }}">
                                 <i class="fas fa-building"></i>
                                 <span>Halaman Museum</span>
                             </a>
                         </li>
 
-                        <li class="{{ Request::is('/user') ? 'active' : '' }}">
+                        <li class="{{ Request::is('transaction') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ url('transaction') }}">
                                 <i class="fas fa-book"></i>
                                 <span>Halaman Transaksi</span>
+                            </a>
+                        </li>
+
+                        <li class="{{ Request::is('verification') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('verification') }}">
+                                <i class="fas fa-qrcode"></i>
+                                <span>Halaman Verifikasi</span>
                             </a>
                         </li>
                     </ul>
