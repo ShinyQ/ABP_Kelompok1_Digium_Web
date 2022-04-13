@@ -17,9 +17,7 @@ use App\Http\Controllers\TransactionItemController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'landing']);
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('/login', [UserController::class, 'view_login']);
@@ -29,6 +27,7 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::middleware(['superuser'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('profile', [UserController::class, 'profile']);
     Route::get('user', [UserController::class, 'index']);
     Route::get('user/{id}', [UserController::class, 'detail']);
     Route::get('user/update_role/{id}/{role}', [UserController::class, 'update_role']);

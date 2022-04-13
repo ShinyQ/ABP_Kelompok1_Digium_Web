@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Museum;
 use App\Models\Transaction;
 
 class DashboardController extends Controller
 {
+    public function landing(){
+        $museums = Museum::inRandomOrder()->limit(15)->get();
+        return view('welcome', compact('museums'));
+    }
+
     public function index(){
         $title = "Halaman Dashboard";
 

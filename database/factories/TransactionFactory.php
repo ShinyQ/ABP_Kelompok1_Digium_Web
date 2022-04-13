@@ -20,10 +20,16 @@ class TransactionFactory extends Factory
     public function definition()
     {
         $qty = rand(1, 10);
-        $status = $this->faker->randomElement(['Waiting Verification', 'Waiting Payment', 'Paid', 'Cancelled']);
         $receipt = null;
 
-        if ($status == 'Waiting Verification'){
+        $status = $this->faker->randomElement([
+            'Waiting Verification',
+            'Waiting Payment',
+            'Paid',
+            'Cancelled'
+        ]);
+
+        if ($status == 'Waiting Verification' || $status == 'Paid'){
             $receipt =  $this->faker->randomElement([
                 'https://pbs.twimg.com/media/Czx7juDUcAAhOxg.jpg',
                 'https://www.itworks.id/wp-content/uploads/2021/05/Struk-ATM-Link.jpg',

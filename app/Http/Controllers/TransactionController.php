@@ -19,8 +19,8 @@ class TransactionController extends Controller
 
     public function show($id)
     {
+        $title = 'Transaction ID #'. $id;
         $data = TransactionItem::where('transaction_id',$id)->get();
-        $title = 'Transaction Item ID #'. $id;
 
         return view('transaction.show', compact('title','data'));
     }

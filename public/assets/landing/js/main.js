@@ -20,7 +20,7 @@
 	doc.setAttribute('data-useragent', navigator.userAgent);
 
 
-	/* Preloader 
+	/* Preloader
 	 * -------------------------------------------------- */
 	var ssPreloader = function () {
 
@@ -215,24 +215,28 @@
 	* ------------------------------------------------------ */
 
 	$('.owl-carousel').owlCarousel({
+        autoplay:true,
+        autoplayTimeout:2000,
+        autoplayHoverPause:true,
 		loop: true,
-		margin: 30,
+		margin: 20,
 		dots: true,
 		nav: false,
 		responsiveClass: true,
 		responsive: {
 			0: {
-				items: 2,
+				items: 1,
 				margin: 10,
 				stagePadding: 20,
 			},
 			600: {
-				items: 3,
+				items: 2,
 				margin: 20,
-				stagePadding: 50,
+				stagePadding: 30,
 			},
 			1000: {
-				items: 4
+				items: 3,
+                stagePadding: 40,
 			}
 		}
 	});
@@ -274,9 +278,9 @@
 		ssAOS();
 		ssBackToTop();
 
-		// to use the mailchimp form, uncomment the 
+		// to use the mailchimp form, uncomment the
 		// function call ssAjaxChimp() below:
-		// ssAjaxChimp(); 
+		// ssAjaxChimp();
 
 	})();
 

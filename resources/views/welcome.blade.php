@@ -39,7 +39,14 @@
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
 
 </head>
-
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+</style>
 <body id="top">
 
 <!-- header
@@ -56,10 +63,9 @@
             <li><a class="smoothscroll" href="#about" title="about">About</a></li>
             <li><a class="smoothscroll" href="#pricing" title="pricing">Goals</a></li>
             <li><a class="smoothscroll" href="#testimonials" title="testimonials">Museums</a></li>
-            <li><a class="smoothscroll" href="#download" title="download">Download</a></li>
         </ul>
 
-        <a href="#" title="sign-up" class="button button-primary cta">Sign Up</a>
+        <a href="#" title="sign-up" class="button button-primary cta">Download</a>
     </nav>
 
     <a class="header-menu-toggle" href="#"><span>Menu</span></a>
@@ -77,14 +83,14 @@
         <div class="row contents">
             <div class="home-content-left">
 
-                <h3 data-aos="fade-up">Welcome to Digium</h3>
+                <h3>Welcome to Digium</h3>
 
-                <h1 data-aos="fade-up">
+                <h1>
                     Digital <br>
                     Museum
                 </h1>
 
-                <div class="buttons" data-aos="fade-up">
+                <div class="buttons">
                     <a href="#download" class="smoothscroll button stroke">
                         <span class="icon-circle-down" aria-hidden="true"></span>
                         Download App
@@ -99,7 +105,7 @@
             </div>
 
             <div class="home-image-right">
-                <img src="{{ asset('assets/landing/images/iphone-screen.png')}}" data-aos="fade-up">
+                <img src="{{ asset('assets/landing/images/iphone-screen.png')}}">
             </div>
         </div>
 
@@ -135,13 +141,12 @@
 ================================================== -->
 <section id="about">
 
-    <div class="row about-intro">
-        <br><br><br>
+    <div class="row about-intro" style="margin-top: 4rem">
         <div class="col-four">
-            <h1 class="intro-header" data-aos="fade-up">About Our App</h1>
+            <h1 class="intro-header">About Digium</h1>
         </div>
         <div class="col-eight">
-            <p class="lead" data-aos="fade-up">
+            <p style="font-family: Nunito!important; text-align: justify" class="lead">
                 This application will make it easier and provide information
                 that Indonesia is rich in museums accompanied by historical
                 heritage objects. The more often we visit museums, the more
@@ -150,66 +155,57 @@
                 the heroes who contributed to the Indonesian nation.
             </p>
         </div>
-
     </div>
 
-    <div class="row about-features" style="margin-bottom: 8rem;">
+    <div class="row about-intro" style="margin-top: 8rem">
+        <div class="col-twelve">
+            <h1 class="intro-header">Our Features</h1>
+        </div>
 
-        <div class="features-list block-1-3 block-m-1-2 block-mob-full group">
+        <img src="{{ asset('assets/landing/images/main-menu.jpeg')}}" style="width: 80%!important;" class="center" alt="" srcset="">
+    </div>
 
-            <img src="{{ asset('assets/landing/images/main-menu.jpeg')}}" alt="" srcset="">
-
-        </div> <!-- end features-list -->
-
-    </div> <!-- end about-features -->
-
-    <div class="row about-bottom-image">
-
+    <div class="row about-bottom-image" style="margin-top: 8rem;">
+        <h1 style="margin-bottom: 8rem;" class="intro-header">Overview Application</h1>
         <img src="{{ asset('assets/landing/images/app-screens-new-1200.png')}}"
              srcset="{{ asset('assets/landing/images/app-screens-new-600.png')}} 600w,
                      {{ asset('assets/landing/images/app-screens-new-1200.png')}} 1200w,
                      {{ asset('assets/landing/images/app-screens-new-2800.png')}} 2800w"
              sizes="(max-width: 2800px) 100vw, 2800px"
-             alt="App Screenshots" data-aos="fade-up">
-
-    </div> <!-- end about-bottom-image -->
-
+             alt="App Screenshots">
+    </div>
 </section> <!-- end about -->
 
 
-<!-- pricing
-================================================== -->
 <section id="pricing">
     <div class="row pricing-content">
-
         <div class="col-four pricing-intro">
-            <h1 class="intro-header" data-aos="fade-up">Our Goals</h1>
+            <h1 class="intro-header">Our Goals</h1>
         </div>
 
         <div class="col-eight pricing-table">
             <div class="row">
+                <div class="col-six plan-wrap">
+                    <div class="plan-block">
+                        <div class="plan-top-part">
+                            <h3 class="plan-block-title">
+                                <img src="{{ asset('assets/landing/images/ApaItuMuseum.jpeg') }}" width="90%" alt="">
+                            </h3>
+                            <h3 class="plan-block-title">Edukasi Museum</h3>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-six plan-wrap">
-                    <div class="plan-block" data-aos="fade-up">
-
+                    <div class="plan-block">
                         <div class="plan-top-part">
-                            <h3 class="plan-block-title">Make Museums</h3>
-                            <h3 class="plan-block-title">Great Again</h3>
+                            <h3 class="plan-block-title">
+                                <img src="{{ asset('assets/landing/images/SejarahBerdiriIndonesia.jpeg') }}" alt="">
+                            </h3>
+                            <h3 class="plan-block-title">Promosi Museum Di Indonesia</h3>
                         </div>
-
                     </div>
-                </div> <!-- end plan-wrap -->
-
-                <div class="col-six plan-wrap">
-                    <div class="plan-block" data-aos="fade-up">
-
-                        <div class="plan-top-part">
-                            <h3 class="plan-block-title">Enhance Your</h3>
-                            <h3 class="plan-block-title">Knowledge</h3>
-                        </div>
-
-                    </div>
-                </div> <!-- end plan-wrap -->
+                </div>
 
             </div>
         </div> <!-- end pricing-table -->
@@ -220,11 +216,12 @@
         <div class="col-two pricing-intro"></div>
         <div class="col-four pricing-table">
             <div class="col-twelve plan-wrap">
-                <div class="plan-block" data-aos="fade-up">
-
+                <div class="plan-block">
                     <div class="plan-top-part">
-                        <h3 class="plan-block-title">Make It</h3>
-                        <h3 class="plan-block-title">Simple</h3>
+                        <h3 class="plan-block-title">
+                            <img src="{{ asset('assets/landing/images/FungsiMuseum.jpeg') }}" alt="">
+                        </h3>
+                        <h3 class="plan-block-title">Informasi Museum</h3>
                     </div>
 
                 </div>
@@ -238,158 +235,52 @@
 <!-- Testimonials Section
 ================================================== -->
 <section id="testimonials" style="margin-top: 10rem;">
-
     <div class="row">
         <div class="col-twelve">
-            <h1 class="intro-header" data-aos="fade-up">10 Most Popular Museums</h1>
+            <h1 class="intro-header">Recommended Museums</h1>
         </div>
     </div>
 
-    <div class="row owl-wrap">
-
+    <div class="row owl-wrap" style="margin-top: 4rem;">
         <div class="owl-carousel owl-theme">
+            @foreach($museums as $museum)
             <div class="carousel-item">
-                <a href="">
+                <a href="museum/{{ $museum->id }}">
                     <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum1.jpg')}}" class="item-image">
+                        @if(substr($museum->background, 0, 4) == 'http')
+                            <img class="item-image" src="{{ $museum->background }}" alt="{{ $museum->name }}">
+                        @else
+                            <img class="item-image" src="{{ asset('assets/images/museum/'. $museum->background) }}" alt="{{ $museum->name }}">
+                        @endif
+                    </div>
 
-                    </div>
                     <div class="carousel-item-text">
-                        <span class="item-kicker">Restaurante de São Paulo</span>
-                        <h3 class="item-title">Mani</h3>
+                        <span class="item-kicker">Berdiri Sejak {{ $museum->year_built }}</span>
+                        <h3 class="item-title" style="margin-top: 10px">{{ substr($museum->name, 0, 27) }}</h3>
                     </div>
                 </a>
             </div>
-            <div class="carousel-item">
-                <a href="">
-                    <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum2.jpg')}}" class="item-image">
-
-                    </div>
-                    <div class="carousel-item-text">
-                        <span class="item-kicker">Restaurante de São Paulo</span>
-                        <h3 class="item-title">Tordesilhas</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="">
-                    <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum3.jpg')}}" class="item-image">
-
-                    </div>
-                    <div class="carousel-item-text">
-                        <span class="item-kicker">Restaurante que você já foi</span>
-                        <h3 class="item-title">Bar do Luiz Fernandes</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="">
-                    <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum4.jpg')}}" class="item-image">
-                    </div>
-                    <div class="carousel-item-text">
-                        <span class="item-kicker">Para ir a dois</span>
-                        <h3 class="item-title">A Figueira Rubaiyat</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="">
-                    <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum5.jpg')}}" class="item-image">
-                    </div>
-                    <div class="carousel-item-text">
-                        <span class="item-kicker">Coxinha</span>
-                        <h3 class="item-title">Ragazzo</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="">
-                    <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum6.jpg')}}" class="item-image">
-                    </div>
-                    <div class="carousel-item-text">
-                        <span class="item-kicker">Cafeteria</span>
-                        <h3 class="item-title">Starbucks</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="">
-                    <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum7.jpg')}}" class="item-image">
-                    </div>
-                    <div class="carousel-item-text">
-                        <span class="item-kicker">Restaurante de São Paulo</span>
-                        <h3 class="item-title">Mani</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="">
-                    <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum8.jpg') }}" class="item-image">
-                    </div>
-                    <div class="carousel-item-text">
-                        <span class="item-kicker">Restaurante de São Paulo</span>
-                        <h3 class="item-title">Mani</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="">
-                    <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum9.jpg') }}" class="item-image">
-                    </div>
-                    <div class="carousel-item-text">
-                        <span class="item-kicker">Restaurante de São Paulo</span>
-                        <h3 class="item-title">Mani</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="">
-                    <div class="carousel-item-image">
-                        <img src="{{ asset('assets/landing/images/museum10.jpg')}}" class="item-image">
-                    </div>
-                    <div class="carousel-item-text">
-                        <span class="item-kicker">Restaurante de São Paulo</span>
-                        <h3 class="item-title">Mani</h3>
-                    </div>
-                </a>
-            </div>
+            @endforeach
         </div>
-
-    </div> <!-- end flex-container -->
-
-</section> <!-- end testimonials -->
+    </div>
+</section>
 <br><br>
 
-<!-- download
-================================================== -->
 <section id="download">
-
     <div class="row">
         <div class="col-full">
-            <h1 class="intro-header" data-aos="fade-up">Download Our App Today!</h1>
-
-            <p class="lead" data-aos="fade-up">
-                Ntar disini QR YES
+            <h1 class="intro-header">Download Our App Today!</h1>
+            <p class="lead">
+                <img src="{{ asset('assets/images/qr-code.png') }}" alt="QR Code Aplikasi Digium" width="150px">
             </p>
-
             <ul class="download-badges">
-                <li><a href="#" title="" class="badge-appstore" data-aos="fade-up">App Store</a></li>
-                <li><a href="#" title="" class="badge-googleplay" data-aos="fade-up">Play Store</a></li>
+                <li><a href="https://bit.ly/digiumapp" title="" class="badge-appstore">App Store</a></li>
+                <li><a href="https://bit.ly/digiumapp" title="" class="badge-googleplay">Play Store</a></li>
             </ul>
-
         </div>
     </div>
 
-</section> <!-- end download -->
-
+</section>
 
 <!-- footer
 ================================================== -->
@@ -397,15 +288,12 @@
 
     <div class="footer-main">
         <div class="row">
-
             <div class="col-three md-1-3 tab-full footer-info">
 
                 <div class="footer-logo"></div>
-
                 <p>
-                    Digium the best
+                    Learn And Love Your Country
                 </p>
-
                 <ul class="footer-social-list">
                     <li>
                         <a href="#"><i class="fa fa-facebook-square"></i></a>
@@ -423,27 +311,21 @@
                         <a href="#"><i class="fa fa-instagram"></i></a>
                     </li>
                 </ul>
-
-
-            </div> <!-- end footer-info -->
+            </div>
 
             <div class="col-three md-1-3 tab-1-2 mob-full footer-contact">
-
                 <h4>Contact</h4>
-
                 <p>
                     1600 Amphitheatre Parkway<br>
                     Mountain View, CA <br>
                     94043 US<br>
                 </p>
-
                 <p>
                     someone@dazzlesite.com <br>
                     Phone: (+63) 555 1212 <br>
                     Fax: (+63) 555 0100
                 </p>
-
-            </div> <!-- end footer-contact -->
+            </div>
 
             <div class="col-two md-1-3 tab-1-2 mob-full footer-site-links">
 
@@ -458,7 +340,7 @@
                     <li><a href="#">Privacy Policy</a></li>
                 </ul>
 
-            </div> <!-- end footer-site-links -->
+            </div>
 
             <div class="col-four md-1-2 tab-full footer-subscribe">
 
@@ -473,24 +355,23 @@
                         <label for="mc-email" class="subscribe-message"></label>
                     </form>
                 </div>
-            </div> <!-- end footer-subscribe -->
-        </div> <!-- /row -->
-    </div> <!-- end footer-main -->
+            </div>
+        </div>
+    </div>
 
 
     <div class="footer-bottom">
         <div class="row">
             <div class="col-twelve">
                 <div class="copyright">
-                    <span>© Copyright Dazzle 2018.</span>
-                    <span>Design by <a href="http://www.styleshout.com/">styleshout</a></span>
+                    <span>©Copyright Digium 2022.</span>
                 </div>
 
                 <div id="go-top">
                     <a class="smoothscroll" title="Back to Top" href="#top"><i class="icon-arrow-up"></i></a>
                 </div>
             </div>
-        </div> <!-- end footer-bottom -->
+        </div>
     </div>
 </footer>
 
@@ -498,7 +379,7 @@
     <div id="loader"></div>
 </div>
 
-<!-- Java Script
+<!-- JavaScript
 ================================================== -->
 <script src="{{ asset('assets/landing/js/jquery-2.1.3.min.js') }}"></script>
 <script src="{{ asset('assets/landing/js/plugins.js') }}"></script>

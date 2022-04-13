@@ -42,7 +42,7 @@
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ session()->get('user')->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{ url('/user/profile') }}" class="dropdown-item has-icon">
+                            <a href="{{ url('/profile') }}" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
                             </a>
                             <div class="dropdown-divider"></div>

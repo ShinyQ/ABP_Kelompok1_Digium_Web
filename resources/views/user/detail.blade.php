@@ -2,7 +2,7 @@
 @section('content')
     <div class="section-header">
         <div class="aligns-items-center d-inline-block">
-            <a href="{{ url('user') }}">
+            <a href="{{ url('dashboard') }}">
                 <i class="h5 fa fa-arrow-left"></i>
             </a> &nbsp; &nbsp;
             <h1>{{ $title }}</h1>
@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-3">
                 <div class="card ">
-                    <div class="card-header ">
+                    <div class="card-header">
                         @if(!$user->photo)
                             <img class="rounded-circle profile-widget-picture img-fluid mx-auto" width="200"
                                  src="{{ 'https://i.pravatar.cc/300?nocache='. microtime() }}" alt="Photo Profile">

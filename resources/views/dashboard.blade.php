@@ -25,7 +25,7 @@
             }
 
             .zoom:hover {
-                transform: scale(2.5);
+                transform: scale(2);
             }
         </style>
 
@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mb-4">Verifikasi Transaksi</h4>
+                        <h4 class="mt-2 mb-4">Verifikasi Transaksi Terkini</h4>
                         <div class="table-responsive">
                             <table id="dataTable" class="table-bordered table-md table">
                                 <thead>
@@ -44,7 +44,6 @@
                                     <th>Nama</th>
                                     <th>Total Price</th>
                                     <th width="3%">Qty</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -54,9 +53,9 @@
                                         <td>{{ $tran->id }}</td>
                                         @if(!is_null($tran->receipt))
                                             @if(substr($tran->receipt, 0, 4) == 'http')
-                                                <td><img class="zoom" src="{{ $tran->receipt }}" alt="" width="120px"></td>
+                                                <td><img class="zoom" src="{{ $tran->receipt }}" alt="" width="180px"></td>
                                             @else
-                                                <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="120px"></td>
+                                                <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="180px"></td>
 
                                             @endif
                                         @else
@@ -66,17 +65,6 @@
                                         <td>{{ $tran->user->name }}</td>
                                         <td>{{ 'Rp' . number_format($tran->total_price, 2, ',', '.') }}</td>
                                         <td width="3%">{{ $tran->qty }}</td>
-
-                                        @if ($tran->status =='Paid')
-                                            <td class="badge badge-success">{{ $tran->status }}</td>
-                                        @elseif ($tran->status == 'Waiting Payment')
-                                            <td class="badge badge-secondary">{{ $tran->status }}</td>
-                                        @elseif ($tran->status == 'Waiting Verification')
-                                            <td class="badge badge-warning">{{ $tran->status }}</td>
-                                        @else
-                                            <td class="badge badge-danger">{{ $tran->status }}</td>
-                                        @endif
-
                                         <td>
                                             <a href="/transaction/{{ $tran->id }}" class="btn btn-outline-primary">Detail</a>
                                             @if ($tran->status != 'Paid' && $tran->status != 'Cancelled')
