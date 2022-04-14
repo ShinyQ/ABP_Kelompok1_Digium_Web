@@ -11,7 +11,7 @@ class Museum extends Model
 
     public $fillable =
         [
-            'name', 'photo', 'total_price',
+            'name', 'address', 'price',
             'background', 'panorama', 'description',
             'phone', 'year_built', 'latitude', 'longitude'
         ];

@@ -1,56 +1,77 @@
 @extends('layout.main')
 @section('content')
-    <div class="section-header">
-        <div class="aligns-items-center d-inline-block">
-            <h1>{{ $title }}</h1>
-        </div>
+@if(session('msg'))
+<div class="alert alert-success alert-dismissible show fade">
+    <div class="alert-body">
+        <button class="close" data-dismiss="alert">
+            <span>×</span>
+        </button>
+        {{ session('msg') }}
     </div>
+</div>
+@endif
+<div class="section-header">
+    <div class="aligns-items-center d-inline-block">
+        <h1>{{ $title }}</h1>
+    </div>
+    <div class="aligns-items-right d-inline-block">
+        <a href="museum/create" class="btn btn-primary" style="position: relative; left: 600px;">
+            Tambah data
+        </a>
+    </div>
+</div>
 
-    <div class="section-body">
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="dataTable" class="table-bordered table-md table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Photo</th>
-                                <th style="width: 15%">Name</th>
-                                <th style="width: 20%">Address</th>
-                                <th>Phone</th>
-                                <th>Harga Tiket</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($museums as $key => $museum)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    @if(substr($museum->background, 0, 4) == 'http')
-                                        <td><img class="zoom" src="{{ $museum->background }}" alt="" width="150px"></td>
-                                    @else
-                                        <td><img class="zoom" src="{{ asset('assets/images/museum/'. $museum->background) }}" alt="" width="150px"></td>
-                                    @endif
-                                    <td style="width: 15%">{{ $museum->name }}</td>
-                                    <td style="width: 20%">{{ $museum->address }}</td>
-                                    <td>{{ $museum->phone }}</td>
-                                    <td>{{ 'Rp' . number_format($museum->price, 2, ',', '.') }}</td>
-                                    <td>
-                                        <a href="#" data-id="{{ $museum->id }}" class="detail btn btn-primary">
-                                            Detail
-                                        </a>
-                                        <a href="museum/{{ $museum->id }}/edit" class="btn btn-outline-primary">
-                                            Edit
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+<div class="section-body">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="dataTable" class="table-bordered table-md table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Photo</th>
+                            <th style="width: 15%">Name</th>
+                            <th style="width: 20%">Address</th>
+                            <th>Phone</th>
+                            <th>Harga Tiket</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($museums as $key => $museum)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            @if(substr($museum->background, 0, 4) == 'http')
+                                <td><img class="zoom" src="{{ $museum->background }}" alt="" width="150px"></td>
+                            @else
+                                <td><img class="zoom" src="{{ asset('assets/images/museum/'. $museum->background) }}" alt="" width="150px"></td>
+                            @endif
+                            <td style="width: 15%">{{ $museum->name }}</td>
+                            <td style="width: 20%">{{ $museum->address }}</td>
+                            <td>{{ $museum->phone }}</td>
+                            <td>{{ 'Rp' . number_format($museum->price, 2, ',', '.') }}</td>
+                            <td>
+                                <a href="#" data-id="{{ $museum->id }}" class="detail btn btn-primary">
+                                    Detail
+                                </a>
+                                <a href="museum/{{ $museum->id }}/edit" class="btn btn-outline-primary">
+                                    Edit
+                                </a>
+                                <form action="museum/{{ $museum->id }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -79,13 +100,15 @@
                 <div class="form-group row mb-4">
                     <label class="col-sm-2 col-form-label">Alamat</label>
                     <div class="col-sm-10">
-                        <textarea id="alamat" name="alamat" class="form-control" style="height: 80px" disabled></textarea>
+                        <textarea id="alamat" name="alamat" class="form-control" style="height: 80px"
+                            disabled></textarea>
                     </div>
                 </div>
                 <div class="form-group row mb-4">
                     <label class="col-sm-2 col-form-label">Deskripsi</label>
                     <div class="col-sm-10">
-                        <textarea id="deskripsi" name="deskripsi" class="form-control" style="height: 80px" disabled></textarea>
+                        <textarea id="deskripsi" name="deskripsi" class="form-control" style="height: 80px"
+                            disabled></textarea>
                     </div>
                 </div>
 
@@ -110,8 +133,8 @@
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
 
 @push('scripts')
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
             $(document).on('click', '.detail', function(event) {
                 event.preventDefault();
                 const id = $(this).data('id');
@@ -151,5 +174,5 @@
                 });
             });
         });
-    </script>
+</script>
 @endpush
