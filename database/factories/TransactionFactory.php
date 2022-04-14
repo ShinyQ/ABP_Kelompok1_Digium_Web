@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Museum;
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 use App\Models\User;
@@ -21,6 +22,7 @@ class TransactionFactory extends Factory
     {
         $qty = rand(1, 10);
         $receipt = null;
+        $museum = Museum::get()->random();
 
         $status = $this->faker->randomElement([
             'Waiting Verification',
@@ -28,6 +30,7 @@ class TransactionFactory extends Factory
             'Paid',
             'Cancelled'
         ]);
+
 
         if ($status == 'Waiting Verification' || $status == 'Paid'){
             $receipt =  $this->faker->randomElement([
@@ -40,12 +43,12 @@ class TransactionFactory extends Factory
 
         return [
             'user_id' => User::get()->random()->id,
-            'museum_id'=> Museum::get()->random()->id,
-            'total_price' => $this->faker->numberBetween(15000, 12500) * $qty,
+            'museum_id'=> $museum->id,
+            'total_price' => $museum->price * $qty,
             'qty' => $qty,
             'receipt' => $receipt,
             'status'=> $status,
-            'created_at' => Carbon::now()->addDays(rand(1, 7)),
+            'created_at' => Carbon::now()->addDays(rand(1, 14)),
             'updated_at' => Carbon::now()->timestamp,
         ];
     }

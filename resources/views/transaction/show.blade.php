@@ -19,8 +19,12 @@
                         </div>
                         <div class="row card-body">
                             <div class="col-md-4">
-                                <img src="{{ asset('assets/images/transaction/'. $item->transaction_id .'/'. $item->qr_code) }}" width="100px" alt="">
+                                @if($item->qr_code)
+                                    <img src="{{ asset('assets/images/transaction/'. $item->transaction_id .'/'. $item->qr_code) }}" width="100px" alt="">
+                                @else
+                                    <img src="{{ asset('assets/images/qr-code.png') }}" width="100px" alt="">
 
+                                @endif
                             </div>
                             <div class="col-md-8">
                                 <p style="font-size: 14px" class="mt-4">

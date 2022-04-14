@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('background');
-            $table->string('panorama');
+            $table->string('panorama')->nullable();
             $table->text('description');
             $table->string('address');
             $table->string('phone');
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->double('longitude')->nullable();
             $table->integer('price')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

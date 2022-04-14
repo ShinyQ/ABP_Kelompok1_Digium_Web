@@ -8,12 +8,12 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <div style="height: 350px" id='myDiv'></div>
+                    <div style="width: 100%; height: 350px" id='myDiv'></div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div style="height: 350px" id='myDiv2'></div>
+                    <div style="width: 100%; height: 350px" id='myDiv2'></div>
                 </div>
             </div>
         </div>
@@ -51,22 +51,16 @@
                                 @foreach ($transaction as $key => $tran)
                                     <tr>
                                         <td>{{ $tran->id }}</td>
-                                        @if(!is_null($tran->receipt))
-                                            @if(substr($tran->receipt, 0, 4) == 'http')
-                                                <td><img class="zoom" src="{{ $tran->receipt }}" alt="" width="180px"></td>
-                                            @else
-                                                <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="180px"></td>
-
-                                            @endif
+                                        @if(substr($tran->receipt, 0, 4) == 'http')
+                                            <td><img class="zoom" src="{{ $tran->receipt }}" alt="" width="180px"></td>
                                         @else
-                                            <td>-</td>
+                                            <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="180px"></td>
                                         @endif
-                                        <td style="width: 15%">{{ $tran->museum->name }}</td>
+                                        <td style="width: 15%">{{ $tran->museum->name }} <br> ({{ 'Rp' . number_format($tran->museum->price, 2, ',', '.') }})</td>
                                         <td>{{ $tran->user->name }}</td>
                                         <td>{{ 'Rp' . number_format($tran->total_price, 2, ',', '.') }}</td>
                                         <td width="3%">{{ $tran->qty }}</td>
                                         <td>
-                                            <a href="/transaction/{{ $tran->id }}" class="btn btn-outline-primary">Detail</a>
                                             @if ($tran->status != 'Paid' && $tran->status != 'Cancelled')
                                                 <a href="/transaction_verification/{{ $tran->id }}" class="btn btn-primary">Verifikasi</a>
                                             @endif
@@ -86,11 +80,20 @@
     <script src='https://cdn.plot.ly/plotly-2.8.3.min.js'></script>
 
     <script>
+        let total_transaction = @json($get_transaction);
+
         const trace0 = {
             x: @json($get_date),
             y: @json($get_transaction),
             type: 'line',
-            name: 'Peminjaman'
+            name: 'Peminjaman',
+            line: {
+                color: '#18C5FA',
+                width: 2
+            },
+            marker: {
+                color: '#FCB42A'
+            }
         };
 
         const data = [trace0];
@@ -101,17 +104,25 @@
             },
             yaxis: {
                 title: 'Jumlah'
-            }
+            },
         };
+
         Plotly.newPlot('myDiv', data, layout);
     </script>
 
     <script>
+        let total = @json($get_total);
+
         const trace2 = {
             x: @json($get_museum),
             y: @json($get_total),
             type: 'bar',
-            name: 'Grafik Peminjaman'
+            name: 'Grafik Peminjaman',
+            text: total.map(String),
+            textposition: 'auto',
+            marker:{
+                color: ['#18C5FA', '#18C5FA', '#18C5FA']
+            },
         };
         const data1 = [trace2];
 
@@ -122,7 +133,7 @@
             },
             yaxis: {
                 title: 'Jumlah'
-            },
+            }
         };
 
         Plotly.newPlot('myDiv2', data1, layout1);

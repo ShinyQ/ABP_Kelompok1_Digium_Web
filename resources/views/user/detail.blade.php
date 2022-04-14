@@ -57,17 +57,23 @@
                                         <td>{{ $item->total_price }}</td>
                                         <td>{{ $item->qty }}</td>
                                         @if ($item->status == 'Paid')
-                                            <td class="badge badge-success">{{ $item->status }}</td>
+                                            <td class="badge badge-success" style="margin: 10%">{{ $item->status }}</td>
                                         @elseif ($item->status == 'Waiting Payment')
-                                            <td class="badge badge-secondary">{{ $item->status }}</td>
+                                            <td class="badge badge-secondary" style="margin: 10%">{{ $item->status }}</td>
                                         @elseif ($item->status == 'Waiting Verification')
-                                            <td class="badge badge-warning">{{ $item->status }}</td>
+                                            <td class="badge badge-warning" style="margin: 10%">{{ $item->status }}</td>
                                         @else
-                                            <td class="badge badge-danger">{{ $item->status }}</td>
+                                            <td class="badge badge-danger" style="margin: 10%">{{ $item->status }}</td>
                                         @endif
 
                                         <td>
-                                            <a href="/transaction/{{ $item->id }}" class="btn btn-outline-primary">Detail</a>
+                                            @if ($item->status == 'Paid')
+                                                <a href="/transaction/{{ $item->id }}" class="btn btn-primary">Detail</a>
+                                            @elseif ($item->status != 'Paid' && $item->status != 'Cancelled')
+                                                <a href="/transaction_verification/{{ $item->id }}" class="btn btn-primary">Verifikasi</a>
+                                            @else
+                                                <button href="#" class="btn btn-outline-primary" disabled>Dibatalkan</button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

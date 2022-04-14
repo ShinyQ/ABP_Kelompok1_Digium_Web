@@ -21,6 +21,6 @@ class Transaction extends Model
 
     public function museum(){
         return $this->hasOne(Museum::class, 'id', 'museum_id')
-            ->select('id', 'name', 'background');
+            ->select('id', 'name', 'background', 'price');
     }
 }

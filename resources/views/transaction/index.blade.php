@@ -61,7 +61,6 @@
                                     <td><img class="zoom" src="{{ $tran->receipt }}" alt="" width="120px"></td>
                                 @else
                                     <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="120px"></td>
-
                                 @endif
                             @else
                                 <td>-</td>
@@ -70,21 +69,22 @@
                             <td>{{ $tran->user->name }}</td>
                             <td>{{ 'Rp' . number_format($tran->total_price, 2, ',', '.') }}</td>
                             <td width="3%">{{ $tran->qty }}</td>
-
-                            @if ($tran->status =='Paid')
-                                <td class="badge badge-success">{{ $tran->status }}</td>
+                            @if ($tran->status == 'Paid')
+                                <td class="badge badge-success" style="margin: 10%">{{ $tran->status }}</td>
                             @elseif ($tran->status == 'Waiting Payment')
-                                <td class="badge badge-secondary">{{ $tran->status }}</td>
+                                <td class="badge badge-secondary" style="margin: 10%">{{ $tran->status }}</td>
                             @elseif ($tran->status == 'Waiting Verification')
-                                <td class="badge badge-warning">{{ $tran->status }}</td>
+                                <td class="badge badge-warning" style="margin: 10%">{{ $tran->status }}</td>
                             @else
-                                <td class="badge badge-danger">{{ $tran->status }}</td>
+                                <td class="badge badge-danger" style="margin: 10%">{{ $tran->status }}</td>
                             @endif
-
                             <td>
-                                <a href="/transaction/{{ $tran->id }}" class="btn btn-outline-primary">Detail</a>
-                                @if ($tran->status != 'Paid' && $tran->status != 'Cancelled')
+                                @if ($tran->status == 'Paid')
+                                    <a href="/transaction/{{ $tran->id }}" class="btn btn-primary">Detail</a>
+                                @elseif ($tran->status != 'Paid' && $tran->status != 'Cancelled')
                                     <a href="/transaction_verification/{{ $tran->id }}" class="btn btn-primary">Verifikasi</a>
+                                @else
+                                    <button href="#" class="btn btn-outline-primary" disabled>Dibatalkan</button>
                                 @endif
                             </td>
                         </tr>

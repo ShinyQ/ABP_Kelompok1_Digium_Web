@@ -1,28 +1,37 @@
 @extends('layout.main')
 @section('content')
-@if(session('msg'))
-<div class="alert alert-success alert-dismissible show fade">
-    <div class="alert-body">
-        <button class="close" data-dismiss="alert">
-            <span>×</span>
-        </button>
-        {{ session('msg') }}
-    </div>
-</div>
-@endif
 <div class="section-header">
     <div class="aligns-items-center d-inline-block">
         <h1>{{ $title }}</h1>
     </div>
-    <div class="aligns-items-right d-inline-block">
-        <a href="museum/create" class="btn btn-primary" style="position: relative; left: 600px;">
-            Tambah data
-        </a>
-    </div>
 </div>
+
+@if ($message = Session::get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ $message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+@if ($message = Session::get('failed'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ $message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 
 <div class="section-body">
     <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <a href="{{ url('museum/create') }}" class="btn btn-icon icon-left btn-primary">
+                <i class="fa fa-plus"></i>
+                &nbsp; Tambah Data Museum
+            </a>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="dataTable" class="table-bordered table-md table">
@@ -30,9 +39,8 @@
                         <tr>
                             <th>#</th>
                             <th>Photo</th>
-                            <th style="width: 15%">Name</th>
-                            <th style="width: 20%">Address</th>
-                            <th>Phone</th>
+                            <th style="width: 20%">Name</th>
+                            <th style="width: 14%">Phone</th>
                             <th>Harga Tiket</th>
                             <th>Action</th>
                         </tr>
@@ -42,27 +50,27 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             @if(substr($museum->background, 0, 4) == 'http')
-                                <td><img class="zoom" src="{{ $museum->background }}" alt="" width="150px"></td>
+                                <td><img class="zoom" src="{{ $museum->background }}" alt="" width="250px"></td>
                             @else
-                                <td><img class="zoom" src="{{ asset('assets/images/museum/'. $museum->background) }}" alt="" width="150px"></td>
+                                <td><img class="zoom" src="{{ asset('assets/images/museum/'. $museum->background) }}" alt="" width="250px"></td>
                             @endif
-                            <td style="width: 15%">{{ $museum->name }}</td>
-                            <td style="width: 20%">{{ $museum->address }}</td>
-                            <td>{{ $museum->phone }}</td>
+                            <td style="width: 20%">{{ $museum->name }}</td>
+                            <td style="width: 14%">{{ $museum->phone }}</td>
                             <td>{{ 'Rp' . number_format($museum->price, 2, ',', '.') }}</td>
                             <td>
-                                <a href="#" data-id="{{ $museum->id }}" class="detail btn btn-primary">
+                                <a href="#" data-id="{{ $museum->id }}" class="detail btn btn-outline-primary">
                                     Detail
                                 </a>
-                                <a href="museum/{{ $museum->id }}/edit" class="btn btn-outline-primary">
+                                <a href="museum/{{ $museum->id }}/edit" class="btn btn-primary">
                                     Edit
                                 </a>
-                                <form action="museum/{{ $museum->id }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
-                                </form>
+                                <a
+                                    href="#" data-id="{{ $museum->id }}"
+                                    data-name="{{ $museum->name }}"
+                                    class="btn btn-danger delete"
+                                    data-toggle="modal"
+                                    data-target="#deleteModal">Hapus
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -72,6 +80,15 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).on('click','.delete',function(){
+        let id = $(this).attr('data-id');
+        let museum_name = $(this).attr('data-name');
+
+        $('#deleteForm').attr('action', '/museum/' + id);
+        $('#museum_name').text('Hapus ' + museum_name + '?');
+    });
+</script>
 @endsection
 
 <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -125,6 +142,31 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header mb-3">
+                <h5 class="modal-title" id="museum_name"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="deleteForm" method="post">
+                @csrf
+                @method('DELETE')
+                <p style="font-size: 16px" class="text-center mt-4 mb-5">
+                    Apakah Anda Yakin Ingin Menghapus Museum Ini?
+                </p>
+
+                <div class="modal-footer" style="padding-top: 5px">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Ya</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

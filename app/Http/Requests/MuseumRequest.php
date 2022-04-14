@@ -23,28 +23,29 @@ class MuseumRequest extends FormRequest
      */
     public function rules()
     {
-        if($this->isMethod('post')){
-            $rules = [
+        if($this->isMethod('POST')) {
+            return [
                 'name' => ['required', 'string'],
-                'background' => ['required', 'string'],
-                'panorama' => ['required', 'string'],
-                'description' => ['required', 'text'],
-                'location' => ['required', 'string'],
+                'background' => ['required', 'image', 'mimes:jpeg,png,jpg'],
+                'address' => ['required', 'string'],
+                'description' => ['required', 'string'],
                 'phone' => ['required', 'string'],
-                'coordinate' => ['required', 'point']
-            ];
-        } else {
-            $rules = [
-                'name' => ['string'],
-                'background' => ['string'],
-                'panorama' => ['string'],
-                'description' => ['text'],
-                'location' => ['string'],
-                'phone' => ['string'],
-                'coordinate' => ['point']
+                'year_built' => ['required', 'string'],
+                'price' => ['integer', 'required'],
+                'coordinate' => ['required']
             ];
         }
-
-        return $rules;
+        else {
+            return [
+                'name' => ['string'],
+                'background' => [],
+                'address' => ['required', 'string'],
+                'description' => ['required', 'string'],
+                'phone' => ['required', 'string'],
+                'year_built' => ['required', 'string'],
+                'price' => ['integer', 'required'],
+                'coordinate' => ['required']
+            ];
+        }
     }
 }
