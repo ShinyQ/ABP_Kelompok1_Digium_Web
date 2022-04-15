@@ -150,7 +150,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header mb-3">
-                <h5 class="modal-title" id="museum_name">Hapus Galery</h5>
+                <h5 class="modal-title" id="museum_name">Hapus Galeri</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -159,7 +159,7 @@
                 @csrf
                 @method('DELETE')
                 <p style="font-size: 16px" class="mt-4 mb-5 text-center">
-                    Apakah Anda Yakin Ingin Menghapus Galery Ini?
+                    Apakah Anda Yakin Ingin Menghapus Galeri Ini?
                 </p>
                 <div class="modal-footer" style="padding-top: 5px">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -176,7 +176,7 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header mb-3">
-                    <h5 class="modal-title" id="museum_name">Tambah Galery</h5>
+                    <h5 class="modal-title" id="museum_name">Tambah Galeri</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
