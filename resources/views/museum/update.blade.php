@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    <form action="{{ url('museum/'. $data->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url('museum/' . $data->id) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="section-body">
@@ -39,13 +39,13 @@
                             <h5>Upload Background Museum</h5>
                         </div>
                         <div class="card-body d-flex justify-content-center">
-                            @if(substr($data->background, 0, 4) == 'http')
+                            @if (substr($data->background, 0, 4) == 'http')
                                 <div id="image-preview" class="image-preview" style="height: 250px; background-image: url('{{ $data->background }}'); background-size: cover; background-position: center center;">
                                     <label for="image-upload" id="image-label">Choose File</label>
                                     <input type="file" accept="image/*" name="background" id="image-upload" />
                                 </div>
                             @else
-                                <div id="image-preview" class="image-preview" style="height: 250px; background-image: url('{{ asset('assets/images/museum/'. $data->background) }}'); background-size: cover; background-position: center center;">
+                                <div id="image-preview" class="image-preview" style="height: 250px; background-image: url('{{ asset('assets/images/museum/' . $data->background) }}'); background-size: cover; background-position: center center;">
                                     <label for="image-upload" id="image-label">Choose File</label>
                                     <input type="file" accept="image/*" name="background" id="image-upload" />
                                 </div>
@@ -113,38 +113,90 @@
             <h5>Galeri Foto Museum</h5>
         </div>
         <div class="card-body">
-            <a href="{{ url('gallery/create?id='. $data->id) }}" class="btn btn-icon icon-left btn-primary mb-4">
+            <a href="#" class="btn btn-icon icon-left btn-primary mb-4" data-toggle="modal" data-target="#addModal">
                 <i class="fa fa-plus"></i>
                 &nbsp; Tambah Data Galeri
             </a>
             <div class="row">
                 @forelse($gallery as $item)
-                <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                    <article class="article">
-                        <div class="article-header">
-                            @if(substr($item->photo, 0, 4) == 'http')
-                                <div
-                                    class="article-image"
-                                    data-background="{{ $item->photo }}"
-                                    style='background-image: url("{{ $item->photo }}");'
-                                ></div>
-                            @else
-                                <div
-                                    class="article-image"
-                                    data-background="{{ asset('assets/images/museum/'.$item->id.'/'.$item->photo) }}"
-                                    style='background-image: url("{{ asset('assets/images/museum/'.$item->id.'/'.$item->photo) }}");'
-                                ></div>
-                            @endif
-                        </div>
-                    </article>
-                </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                        <article class="article">
+                            <div class="article-header">
+                                @if (substr($item->photo, 0, 4) == 'http')
+                                    <div class="article-image gallery-item" data-background="{{ $item->photo }}" style='background-image: url("{{ $item->photo }}");'>
+                                        <div class="galery-overlay"></div>
+                                        <a href="#" data-id="{{ $item->id }}" class="btn btn-danger btn-gallery-delete" data-toggle="modal" data-target="#deleteModal">Hapus</a>
+                                    </div>
+                                @else
+                                    <div class="article-image gallery-item" data-background="{{ asset('assets/images/gallery/' . $data->id . '/' . $item->photo) }}" style='background-image: url("{{ asset('assets/images/museum/' . $item->id . '/' . $item->photo) }}");'>
+                                        <div class="galery-overlay"></div>
+                                        <a href="#" data-id="{{ $item->id }}" class="btn btn-danger btn-gallery-delete" data-toggle="modal" data-target="#deleteModal">Hapus</a>
+                                    </div>
+                                @endif
+                            </div>
+                        </article>
+                    </div>
                 @empty
-                <center><h3>Belum Ada Data Galeri</h3></center>
+                    <center>
+                        <h3>Belum Ada Data Galeri</h3>
+                    </center>
                 @endforelse
             </div>
         </div>
     </div>
+@endsection
 
+<div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header mb-3">
+                <h5 class="modal-title" id="museum_name">Hapus Galeri</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="deleteForm" method="post">
+                @csrf
+                @method('DELETE')
+                <p style="font-size: 16px" class="mt-4 mb-5 text-center">
+                    Apakah Anda Yakin Ingin Menghapus Galeri Ini?
+                </p>
+                <div class="modal-footer" style="padding-top: 5px">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Ya</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form id="addForm" action="{{ url('gallery') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header mb-3">
+                    <h5 class="modal-title" id="museum_name">Tambah Galeri</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <input type="hidden" name="museum_id" value="{{ $data->id }}">
+                <div id="image-preview" class="image-preview">
+                    <label for="image-upload" id="image-label">Choose File</label>
+                    <input type="file" accept="image/*" name="photo" id="image-upload" />
+                </div>
+
+                <div class="modal-footer" style="padding-top: 5px">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@push('scripts')
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
 
@@ -152,7 +204,6 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
 
     <script>
-        console.log(@json($coordinate))
         mapboxgl.accessToken = 'pk.eyJ1Ijoic2hpbnlxMTEiLCJhIjoiY2ptY3d3OGxsMTA1dDNsbnl4OXJ1cHpkeCJ9.7fp_UEinaxDc5l8kOT6nBw';
         const map = new mapboxgl.Map({
             container: 'map',
@@ -176,7 +227,7 @@
             .addTo(map);
 
         map.on('click', function(e) {
-            if(marker == null){
+            if (marker == null) {
                 marker = new mapboxgl.Marker()
                     .setLngLat(e.lngLat)
                     .addTo(map);
@@ -185,12 +236,10 @@
             }
 
             lk = e.lngLat
-            document.getElementById("coordinate").value = e.lngLat.lat+","+e.lngLat.lng;
+            document.getElementById("coordinate").value = e.lngLat.lat + "," + e.lngLat.lng;
         });
     </script>
-@endsection
 
-@push('scripts')
     <script>
         $("select").selectric();
         $.uploadPreview({
@@ -203,5 +252,9 @@
             success_callback: null // Default: null
         });
         $(".inputtags").tagsinput('items');
+        $(document).on('click', '.btn-gallery-delete', function() {
+            let id = $(this).attr('data-id');
+            $('#deleteForm').attr('action', '/gallery/' + id);
+        });
     </script>
 @endpush
