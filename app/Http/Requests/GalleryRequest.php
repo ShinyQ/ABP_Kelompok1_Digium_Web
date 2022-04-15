@@ -23,15 +23,15 @@ class GalleryRequest extends FormRequest
      */
     public function rules()
     {
-        if($this->isMethod('post')){
+        if ($this->isMethod('post')) {
             $rules = [
-                'museum_id' => ['required', 'exists:museum,id'],
-                'photo' => ['required', 'string']
+                'museum_id' => ['required', 'exists:museums,id'],
+                'photo' => ['required', 'image', 'mimes:jpeg,png,jpg']
             ];
         } else {
             $rules = [
-                'museum_id' => ['exists:museum,id'],
-                'photo' => ['string']
+                'museum_id' => ['exists:museums,id'],
+                'photo' => ['image', 'mimes:jpeg,png,jpg']
             ];
         }
 
