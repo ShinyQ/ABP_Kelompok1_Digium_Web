@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MuseumController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionItemController;
 /*
@@ -38,5 +39,5 @@ Route::middleware(['superuser'])->group(function () {
 
     Route::resource('transaction', TransactionController::class);
     Route::resource('museum', MuseumController::class);
-
+    Route::resource('gallery', GalleryController::class);
 });

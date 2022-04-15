@@ -107,6 +107,45 @@
             </div>
         </div>
     </form>
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Galeri Foto Museum</h5>
+        </div>
+        <div class="card-body">
+            <a href="{{ url('gallery/create?id='. $data->id) }}" class="btn btn-icon icon-left btn-primary mb-4">
+                <i class="fa fa-plus"></i>
+                &nbsp; Tambah Data Galeri
+            </a>
+            <div class="row">
+                @forelse($gallery as $item)
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                    <article class="article">
+                        <div class="article-header">
+                            @if(substr($item->photo, 0, 4) == 'http')
+                                <div
+                                    class="article-image"
+                                    data-background="{{ $item->photo }}"
+                                    style='background-image: url("{{ $item->photo }}");'
+                                ></div>
+                            @else
+                                <div
+                                    class="article-image"
+                                    data-background="{{ asset('assets/images/museum/'.$item->id.'/'.$item->photo) }}"
+                                    style='background-image: url("{{ asset('assets/images/museum/'.$item->id.'/'.$item->photo) }}");'
+                                >
+
+                            @endif
+                        </div>
+                    </article>
+                </div>
+                @empty
+                <center><h3>Belum Ada Data Galeri</h3></center>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
 

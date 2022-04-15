@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MuseumRequest;
+use App\Models\Gallery;
 use App\Models\Museum;
 use Illuminate\Http\Request;
 
@@ -50,13 +51,15 @@ class MuseumController extends Controller
     public function edit($id)
     {
         $title = 'Edit Museum';
+
         $data = Museum::find($id);
+        $gallery = Gallery::where('museum_id', $id)->get();
 
         $coordinate = [(float) $data->longitude, (float) $data->latitude];
         $coordinate_str = $data->latitude.','.$data->longitude;
 
         return view('museum.update', compact(
-            'title', 'data', 'coordinate', 'coordinate_str'
+            'title', 'data', 'coordinate', 'coordinate_str', 'gallery'
         ));
     }
 
