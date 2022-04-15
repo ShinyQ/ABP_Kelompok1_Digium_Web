@@ -133,8 +133,7 @@
                                     class="article-image"
                                     data-background="{{ asset('assets/images/museum/'.$item->id.'/'.$item->photo) }}"
                                     style='background-image: url("{{ asset('assets/images/museum/'.$item->id.'/'.$item->photo) }}");'
-                                >
-
+                                ></div>
                             @endif
                         </div>
                     </article>

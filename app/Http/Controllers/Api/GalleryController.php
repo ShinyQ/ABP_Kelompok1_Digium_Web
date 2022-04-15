@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
-use Illuminate\Http\Request;
+use Api;
 
 class GalleryController extends Controller
 {
@@ -16,11 +16,6 @@ class GalleryController extends Controller
         $this->response = [];
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function show($id)
     {
         try {

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MuseumRequest;
 use App\Models\Gallery;
 use App\Models\Museum;
-use Illuminate\Http\Request;
 
 class MuseumController extends Controller
 {

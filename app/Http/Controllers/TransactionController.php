@@ -43,7 +43,7 @@ class TransactionController extends Controller
             $client->request('GET', 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='. $name, ['sink' => $name]);
 
             File::move(public_path($name), public_path($path.'/'. $name));
-            TransactionItem::where('id', $item->id)->update(['qr_code' => $name]);
+            TransactionItem::where('id', $item->id)->update(['qr_code' => $name, 'status'=> 'Waiting']);
         }
 
         return redirect()->back()->with('success', 'Sukses verifikasi transaksi');

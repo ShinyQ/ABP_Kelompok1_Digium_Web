@@ -16,10 +16,12 @@ class SuperUserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->get('user')->role == 'superuser'){
-            return $next($request);
+        if(session()->has('user')){
+            if(session()->get('user')->role == 'superuser'){
+                return $next($request);
+            }
         }
 
-        return redirect()->back();
+        return redirect('/user/login')->with('error', 'Harus Login Dahulu');
     }
 }

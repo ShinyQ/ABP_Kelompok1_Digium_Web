@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\MuseumController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TransactionController;
@@ -26,6 +27,8 @@ Route::group(['prefix' => 'museum'], function () {
     Route::get('/', [MuseumController::class, 'index']);
     Route::get('/{id}', [MuseumController::class, 'show']);
 });
+
+Route::get('gallery/{id}', [GalleryController::class, 'show']);
 
 Route::group(['middleware' => 'user'], function() {
     Route::apiResource('transaction', TransactionController::class)->only('store', 'index', 'show', 'update');
