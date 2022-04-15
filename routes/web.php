@@ -18,8 +18,8 @@ use App\Http\Controllers\GoogleProviderController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', [DashboardController::class, 'landing']);
+Route::get('/email/{id}', [UserController::class, 'verify_email']);
 Route::get('auth/callback', [GoogleProviderController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleProviderController::class, 'handleCallback']);
 

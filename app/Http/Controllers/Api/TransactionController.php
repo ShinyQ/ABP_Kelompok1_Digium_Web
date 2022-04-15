@@ -105,6 +105,22 @@ class TransactionController extends Controller
         return Api::apiRespond($this->code, $this->response);
     }
 
+    public function cancel_transaction($id)
+    {
+        try {
+            Transaction::findOrFail($id)->update(['status' => 'Cancelled']);
+        } catch (Exception $e){
+            if($e instanceof ModelNotFoundException){
+                $this->code = 404;
+            } else {
+                $this->code = 500;
+                $this->response = $e->getMessage();
+            }
+        }
+
+        return Api::apiRespond($this->code, $this->response);
+    }
+
     public function add_receipt(Request $request, $id){
         try {
             if(isset($request->receipt)){

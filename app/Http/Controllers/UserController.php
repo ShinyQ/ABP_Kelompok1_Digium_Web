@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +24,7 @@ class UserController extends Controller
 
         return view('user.index', compact('users', 'title'));
     }
+
     public function profile(){
         $id = request()->session()->get('user')->id;
 
@@ -69,8 +71,21 @@ class UserController extends Controller
         return view('user.log', compact('title', 'data'));
     }
 
+    public function verify_email($id){
+        $user = User::where('email_code', $id)->first();
+
+        if ($user){
+            $user->update(['email_code' => null, 'email_verified_at' => Carbon::now()]);
+            return view('email.success');
+        } else {
+            return redirect('/');
+        }
+    }
+
     public function logout(){
         request()->session()->forget('user');
+        Auth::logout();
+
         return redirect('user/login')->with('success', 'Sukses Melakukan Logout');
     }
 }

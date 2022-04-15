@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
+use App\Mail\EmailVerification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
@@ -54,7 +56,6 @@ class UserController extends Controller
         return Api::apiRespond($this->code, $this->response);
     }
 
-
     public function register(UserRequest $request){
         try {
             $data = $request->validated();
@@ -68,7 +69,6 @@ class UserController extends Controller
 
         return Api::apiRespond($this->code, $this->response);
     }
-
 
     public function profile(){
         try {
@@ -92,6 +92,24 @@ class UserController extends Controller
             }
 
             Auth::logout();
+        } catch (Exception $e) {
+            $this->code = 500;
+            $this->response = $e->getMessage();
+        }
+
+        return Api::apiRespond($this->code, $this->response);
+    }
+
+    public function send_verification(){
+        try {
+            $auth = User::where('id', auth()->guard('api')->user()->id)->first();
+            $code = \Str::random(20);
+            $name = $auth->name;
+
+            $auth->update(['email_code' => $code]);
+            $data = ['code' => $code, 'name' => $name];
+
+            Mail::to($auth->email)->send(new EmailVerification($data));
         } catch (Exception $e) {
             $this->code = 500;
             $this->response = $e->getMessage();

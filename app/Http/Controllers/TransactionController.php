@@ -12,7 +12,7 @@ class TransactionController extends Controller
     public function index()
     {
         $title = 'Halaman Transaksi';
-        $transactions = Transaction::with('user', 'transaction_item')->get();
+        $transactions = Transaction::with('user', 'transaction_item')->latest()->get();
 
         return view('transaction.index', compact('title', 'transactions'));
     }

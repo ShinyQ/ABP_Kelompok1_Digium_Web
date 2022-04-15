@@ -202,7 +202,7 @@
                             <h3 class="plan-block-title">
                                 <img src="{{ asset('assets/landing/images/SejarahBerdiriIndonesia.jpeg') }}" alt="">
                             </h3>
-                            <h3 class="plan-block-title">Promosi Museum Di Indonesia</h3>
+                            <h3 class="plan-block-title">Promosi Museum <br> Di Indonesia</h3>
                         </div>
                     </div>
                 </div>
@@ -245,7 +245,7 @@
         <div class="owl-carousel owl-theme">
             @foreach($museums as $museum)
             <div class="carousel-item">
-                <a href="museum/{{ $museum->id }}">
+                <a href=#">
                     <div class="carousel-item-image">
                         @if(substr($museum->background, 0, 4) == 'http')
                             <img class="item-image" src="{{ $museum->background }}" alt="{{ $museum->name }}">
@@ -302,12 +302,6 @@
                         <a href="#"><i class="fa fa-twitter"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-behance"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-dribbble"></i></a>
-                    </li>
-                    <li>
                         <a href="#"><i class="fa fa-instagram"></i></a>
                     </li>
                 </ul>
@@ -316,14 +310,13 @@
             <div class="col-three md-1-3 tab-1-2 mob-full footer-contact">
                 <h4>Contact</h4>
                 <p>
-                    1600 Amphitheatre Parkway<br>
-                    Mountain View, CA <br>
-                    94043 US<br>
+                    Jl. Telekomunikasi No. 1 <br>
+                    Bojongsoang, Sukapura<br>
+                    Bandung, Jawa Barat 40257 <br>
                 </p>
                 <p>
-                    someone@dazzlesite.com <br>
-                    Phone: (+63) 555 1212 <br>
-                    Fax: (+63) 555 0100
+                    digium.official@gmail.com <br>
+                    Phone: 08124047478 <br>
                 </p>
             </div>
 
@@ -334,10 +327,8 @@
                 <ul class="list-links">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About Us</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Terms</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Goals</a></li>
+                    <li><a href="#">Museums</a></li>
                 </ul>
 
             </div>
