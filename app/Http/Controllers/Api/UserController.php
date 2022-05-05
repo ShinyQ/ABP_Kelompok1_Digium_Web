@@ -11,6 +11,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Exception;
 use Api;
+use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
@@ -33,14 +34,14 @@ class UserController extends Controller
     public function login(UserRequest $request)
     {
         if ($request->remember_token) {
-            $data = User::where('email', $request->email)->where('remember_token', $request->remember_token)->first();
+            $user = Socialite::driver("google")->userFromToken($request->remember_token);
+            $data = User::where('email', $user->email)->first();
 
             if (is_null($data)) {
                 $user = User::create([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'photo' => $request->avatar,
-                    'remember_token' => $request->remember_token,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'photo' => $user->avatar,
                     'email_verified_at' => Carbon::now(),
                 ]);
             } else if (Auth::loginUsingId($data->id)) {
