@@ -16,12 +16,14 @@ class UserController extends Controller
 {
     private $code, $response;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->code = 200;
         $this->response = [];
     }
 
-    public function generate_user($user){
+    public function generate_user($user)
+    {
         $success['user'] = $user;
         $success['token'] = $user->createToken('digimu_abp')->accessToken;
 
@@ -30,18 +32,18 @@ class UserController extends Controller
 
     public function login(UserRequest $request)
     {
-        if($request->remember_token){
+        if ($request->remember_token) {
             $data = User::where('email', $request->email)->where('remember_token', $request->remember_token)->first();
 
-            if(is_null($data)){
+            if (is_null($data)) {
                 $user = User::create([
                     'name' => $request->name,
                     'email' => $request->email,
                     'photo' => $request->avatar,
-                    'remmber_token' => $request->remember_token,
+                    'remember_token' => $request->remember_token,
                     'email_verified_at' => Carbon::now(),
                 ]);
-            } else if(Auth::loginUsingId($data->id)){
+            } else if (Auth::loginUsingId($data->id)) {
                 $user = Auth::user();
             }
 
@@ -56,7 +58,8 @@ class UserController extends Controller
         return Api::apiRespond($this->code, $this->response);
     }
 
-    public function register(UserRequest $request){
+    public function register(UserRequest $request)
+    {
         try {
             $data = $request->validated();
             $data['password'] = Bcrypt($request->password);
@@ -70,7 +73,8 @@ class UserController extends Controller
         return Api::apiRespond($this->code, $this->response);
     }
 
-    public function profile(){
+    public function profile()
+    {
         try {
             $this->response = auth()->guard('api')->user();
         } catch (Exception $e) {
@@ -81,11 +85,12 @@ class UserController extends Controller
         return Api::apiRespond($this->code, $this->response);
     }
 
-    public function logout(){
+    public function logout()
+    {
         try {
             $user = auth()->guard('api')->user();
 
-            if($user){
+            if ($user) {
                 foreach ($user->tokens as $token) {
                     $token->revoke();
                 }
@@ -100,7 +105,8 @@ class UserController extends Controller
         return Api::apiRespond($this->code, $this->response);
     }
 
-    public function send_verification(){
+    public function send_verification()
+    {
         try {
             $auth = User::where('id', auth()->guard('api')->user()->id)->first();
             $code = \Str::random(20);
