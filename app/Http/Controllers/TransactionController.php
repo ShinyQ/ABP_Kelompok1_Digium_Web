@@ -39,7 +39,7 @@ class TransactionController extends Controller
             $client->request('GET', 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='. $name, ['sink' => $name]);
 
             $imageName=time().$name;
-            $filePath = 'transactions/' . $name;
+            $filePath = 'transactions/' . $imageName;
             Storage::disk('s3')->put($filePath, file_get_contents($name));
             File::delete($name);
             TransactionItem::where('id', $item->id)->update(['qr_code' => $name, 'status'=> 'Waiting']);
