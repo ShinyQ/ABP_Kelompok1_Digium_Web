@@ -51,11 +51,9 @@
                                 @foreach ($transaction as $key => $tran)
                                     <tr>
                                         <td>{{ $tran->id }}</td>
-                                        @if(substr($tran->receipt, 0, 4) == 'http')
-                                            <td><img class="zoom" src="{{ $tran->receipt }}" alt="" width="180px"></td>
-                                        @else
-                                            <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="180px"></td>
-                                        @endif
+
+                                        <td><img class="zoom" src="{{ $tran->receipt }}" alt="" width="180px"></td>
+
                                         <td style="width: 15%">{{ $tran->museum->name }} <br> ({{ 'Rp' . number_format($tran->museum->price, 2, ',', '.') }})</td>
                                         <td>{{ $tran->user->name }}</td>
                                         <td>{{ 'Rp' . number_format($tran->total_price, 2, ',', '.') }}</td>

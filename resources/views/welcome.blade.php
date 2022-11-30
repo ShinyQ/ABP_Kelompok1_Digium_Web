@@ -247,11 +247,9 @@
             <div class="carousel-item">
                 <a href=#">
                     <div class="carousel-item-image">
-                        @if(substr($museum->background, 0, 4) == 'http')
-                            <img class="item-image" src="{{ $museum->background }}" alt="{{ $museum->name }}">
-                        @else
-                            <img class="item-image" src="{{ asset('assets/images/museum/'. $museum->background) }}" alt="{{ $museum->name }}">
-                        @endif
+
+                        <img class="item-image" src="{{ $museum->background }}" alt="{{ $museum->name }}">
+
                     </div>
 
                     <div class="carousel-item-text">

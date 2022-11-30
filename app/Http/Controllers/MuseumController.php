@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MuseumRequest;
 use App\Models\Gallery;
 use App\Models\Museum;
+use Illuminate\Support\Facades\Storage;
 
 class MuseumController extends Controller
 {
@@ -33,9 +34,11 @@ class MuseumController extends Controller
         $data['longitude'] = $coordinate[1];
         unset($data['coordinate']);
 
-        $name = $data['name'].'.'.$data['background']->getClientOriginalExtension();
-        $data['background']->move(public_path('assets/images/museum'), $name);
-        $data['background'] = $name;
+        $file = $data['background'];
+        $imageName=time().$file->getClientOriginalName();
+        $filePath = 'museums/'. $id . "/" . $imageName;
+        Storage::disk('s3')->put($filePath, file_get_contents($file));
+        $data['background'] = $filePath;
 
         Museum::create($data);
         return redirect('/museum')->with('success', 'Data museum berhasil ditambahkan');
@@ -72,9 +75,11 @@ class MuseumController extends Controller
         unset($data['coordinate']);
 
         if(isset($data['background'])) {
-            $name = $data['name'] . '.' . $data['background']->getClientOriginalExtension();
-            $data['background']->move(public_path('assets/images/museum'), $name);
-            $data['background'] = $name;
+                $file = $data['background'];
+                $imageName=time().$file->getClientOriginalName();
+                $filePath = 'museums/'. $id . "/" . $imageName;
+                Storage::disk('s3')->put($filePath, file_get_contents($file));
+                $data['background'] = $filePath;
         }
 
         Museum::where('id', $id)->update($data);

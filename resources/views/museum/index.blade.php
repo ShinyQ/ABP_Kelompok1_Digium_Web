@@ -49,11 +49,7 @@
                         @foreach ($museums as $key => $museum)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            @if(substr($museum->background, 0, 4) == 'http')
                                 <td><img class="zoom" src="{{ $museum->background }}" alt="" width="250px"></td>
-                            @else
-                                <td><img class="zoom" src="{{ asset('assets/images/museum/'. $museum->background) }}" alt="" width="250px"></td>
-                            @endif
                             <td style="width: 20%">{{ $museum->name }}</td>
                             <td style="width: 14%">{{ $museum->phone }}</td>
                             <td>{{ 'Rp' . number_format($museum->price, 2, ',', '.') }}</td>

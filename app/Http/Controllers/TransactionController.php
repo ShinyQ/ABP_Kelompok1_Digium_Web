@@ -6,6 +6,7 @@ use App\Models\TransactionItem;
 use App\Models\Transaction;
 use GuzzleHttp\Client;
 use File;
+use Illuminate\Support\Facades\Storage;
 
 class TransactionController extends Controller
 {
@@ -33,16 +34,14 @@ class TransactionController extends Controller
 
         foreach ($transaction_item as $item){
             $name = $id.'DIGIUM'.$item->id.'.png';
-            $path = 'assets/images/transaction/'. $id;
-
-            if (!is_dir('assets/images/transaction/'. $id)) {
-                mkdir($path, 0777, true);
-            }
 
             $client = new Client();
             $client->request('GET', 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='. $name, ['sink' => $name]);
 
-            File::move(public_path($name), public_path($path.'/'. $name));
+            $imageName=time().$name;
+            $filePath = 'transactions/' . $name;
+            Storage::disk('s3')->put($filePath, file_get_contents($name));
+            File::delete($name);
             TransactionItem::where('id', $item->id)->update(['qr_code' => $name, 'status'=> 'Waiting']);
         }
 

@@ -39,17 +39,12 @@
                             <h5>Upload Background Museum</h5>
                         </div>
                         <div class="card-body d-flex justify-content-center">
-                            @if (substr($data->background, 0, 4) == 'http')
+
                                 <div id="image-preview" class="image-preview" style="height: 250px; background-image: url('{{ $data->background }}'); background-size: cover; background-position: center center;">
                                     <label for="image-upload" id="image-label">Choose File</label>
                                     <input type="file" accept="image/*" name="background" id="image-upload" />
                                 </div>
-                            @else
-                                <div id="image-preview" class="image-preview" style="height: 250px; background-image: url('{{ asset('assets/images/museum/' . $data->background) }}'); background-size: cover; background-position: center center;">
-                                    <label for="image-upload" id="image-label">Choose File</label>
-                                    <input type="file" accept="image/*" name="background" id="image-upload" />
-                                </div>
-                            @endif
+
                         </div>
                     </div>
 
@@ -122,17 +117,12 @@
                     <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                         <article class="article">
                             <div class="article-header">
-                                @if (substr($item->photo, 0, 4) == 'http')
+
                                     <div class="article-image gallery-item" data-background="{{ $item->photo }}" style='background-image: url("{{ $item->photo }}");'>
                                         <div class="galery-overlay"></div>
                                         <a href="#" data-id="{{ $item->id }}" class="btn btn-danger btn-gallery-delete" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                                     </div>
-                                @else
-                                    <div class="article-image gallery-item" data-background="{{ asset('assets/images/gallery/' . $data->id . '/' . $item->photo) }}" style='background-image: url("{{ asset('assets/images/museum/' . $item->id . '/' . $item->photo) }}");'>
-                                        <div class="galery-overlay"></div>
-                                        <a href="#" data-id="{{ $item->id }}" class="btn btn-danger btn-gallery-delete" data-toggle="modal" data-target="#deleteModal">Hapus</a>
-                                    </div>
-                                @endif
+                             
                             </div>
                         </article>
                     </div>

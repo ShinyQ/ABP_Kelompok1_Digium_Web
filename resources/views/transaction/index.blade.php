@@ -57,11 +57,9 @@
                         <tr>
                             <td>{{ $tran->id }}</td>
                             @if(!is_null($tran->receipt))
-                                @if(substr($tran->receipt, 0, 4) == 'http')
+
                                     <td><img class="zoom" src="{{ $tran->receipt }}" alt="" width="120px"></td>
-                                @else
-                                    <td><img class="zoom" src="{{ asset('assets/images/transaction/'. $tran->id .'/'. $tran->receipt) }}" alt="" width="120px"></td>
-                                @endif
+
                             @else
                                 <td>-</td>
                             @endif
