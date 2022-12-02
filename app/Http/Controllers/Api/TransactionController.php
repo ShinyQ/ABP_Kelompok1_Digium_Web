@@ -124,12 +124,14 @@ class TransactionController extends Controller
     public function add_receipt(Request $request, $id){
         try {
             if(isset($request->receipt)){
-                $name = $request->receipt->getClientOriginalName();
 
-                $request->receipt->move(public_path('assets/images/transaction/'. $id), $name);
+                $file = $request->receipt;
+                $imageName=time().$file->getClientOriginalName();
+                $filePath = 'transaction/receipts/' . $id . "/" . $imageName;
+                Storage::disk('s3')->put($filePath, file_get_contents($file));
 
                 Transaction::where('id', $id)->update([
-                    'receipt' => $name,
+                    'receipt' => $filePath,
                     'status'  => 'Waiting Verification'
                 ]);
             } else {

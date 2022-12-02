@@ -38,7 +38,7 @@ class TransactionController extends Controller
             $client = new Client();
             $client->request('GET', 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='. $name, ['sink' => $name]);
 
-            $imageName=time().$name;
+            $imageName=time()."-".$name;
             $filePath = 'transactions/' . $imageName;
             Storage::disk('s3')->put($filePath, file_get_contents($name));
             File::delete($name);
