@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use GuzzleHttp\Client;
 use File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
 
 class TransactionController extends Controller
 {
@@ -21,13 +22,19 @@ class TransactionController extends Controller
     public function show($id)
     {
         $title = 'Transaction ID #'. $id;
-        $data = TransactionItem::where('transaction_id',$id)->get();
+
+        $data = Cache::remember('transaction:'.$id,300, function () use ($id){
+            return TransactionItem::where('transaction_id',$id)->get();
+        });
 
         return view('transaction.show', compact('title','data'));
     }
 
     public function update($id)
     {
+        Cache::forget('transaction:'.$id);
+        Cache::forget('transactionDetail:'.$id);
+
         Transaction::where('id', $id)->update(['status' => 'Paid']);
 
         $transaction_item = TransactionItem::where('transaction_id', $id)->get();

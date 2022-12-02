@@ -6,6 +6,7 @@ use App\Http\Requests\MuseumRequest;
 use App\Models\Gallery;
 use App\Models\Museum;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
 
 class MuseumController extends Controller
 {
@@ -46,12 +47,17 @@ class MuseumController extends Controller
 
     public function show($id)
     {
-        $museum = Museum::findOrFail($id);
+        $museum = Cache::remember('museumDetail:'.$id,300, function () use ($id){
+            return Museum::with('gallery')->findOrFail($id);
+        });
         return response()->json(['data' => $museum]);
     }
 
     public function edit($id)
     {
+        Cache::forget('museum:'.$id);
+        Cache::forget('museumDetail:'.$id);
+
         $title = 'Edit Museum';
 
         $data = Museum::find($id);
@@ -67,6 +73,9 @@ class MuseumController extends Controller
 
     public function update(MuseumRequest $request, $id)
     {
+        Cache::forget('museum:'.$id);
+        Cache::forget('museumDetail:'.$id);
+
         $data = $request->validated();
         $coordinate = explode(",", $data['coordinate']);
 
@@ -88,6 +97,9 @@ class MuseumController extends Controller
 
     public function destroy($id)
     {
+        Cache::forget('museum:'.$id);
+        Cache::forget('museumDetail:'.$id);
+
         Museum::destroy($id);
         return redirect('/museum')->with('success', 'Data museum berhasil dihapus');
     }

@@ -9,6 +9,7 @@ use Api;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 
 class MuseumController extends Controller
 {
@@ -67,7 +68,10 @@ class MuseumController extends Controller
     public function show($id)
     {
         try {
-            $this->response = Museum::with('gallery')->findOrFail($id);
+            $museum = Cache::remember('museumDetail:'.$id,300, function () use ($id){
+                return Museum::with('gallery')->findOrFail($id);
+            });
+            $this->response = $museum;
         } catch (Exception $e){
             if($e instanceof ModelNotFoundException){
                 $this->code = 404;
