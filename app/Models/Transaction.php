@@ -11,7 +11,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    public $fillable = ['museum_id', 'qty', 'user_id', 'total_price', 'status', 'receipt'];
+    public $fillable = ['museum_id', 'qty', 'user_id', 'for_date' ,'total_price', 'status', 'receipt'];
 
     public function user(){
         return $this->hasOne(User::class, 'id', 'user_id');
