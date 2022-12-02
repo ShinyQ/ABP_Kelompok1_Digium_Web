@@ -36,7 +36,7 @@ class MuseumController extends Controller
 
         $file = $data['background'];
         $imageName=time().$file->getClientOriginalName();
-        $filePath = 'museums/'. $id . "/" . $imageName;
+        $filePath = 'museums/'. $imageName;
         Storage::disk('s3')->put($filePath, file_get_contents($file));
         $data['background'] = $filePath;
 
