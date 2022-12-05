@@ -8,6 +8,8 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionItemController;
 use App\Http\Controllers\GoogleProviderController;
+use App\Http\Controllers\BannerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +43,7 @@ Route::middleware(['superuser'])->group(function () {
     Route::get('transaction_verification/{id}', [TransactionController::class, 'update']);
 
     Route::resource('transaction', TransactionController::class);
+    Route::resource('banner', BannerController::class);
     Route::resource('museum', MuseumController::class);
     Route::resource('gallery', GalleryController::class);
 });
