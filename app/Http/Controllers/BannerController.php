@@ -3,12 +3,43 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\BannerRequest;
 use App\Models\Banner;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
     public function index(){
-        $data = Banner::get();
-        return view('banner', compact('data'));
+        $title = 'Banner Museum';
+        $banners = Banner::get();
+        return view('banner.index', compact('banners', 'title'));
+    }
+
+    public function create(){
+        $title = "Halaman Tambah Banner";
+        return view('banner.add', compact('title'));
+
+    }
+
+    public function show($id)
+    {
+        $banner = Cache::remember('bannerDetail:'.$id,300, function () use ($id){
+            return Banner::findOrFail($id);
+        });
+        return response()->json(['data' => $banner]);
+    }
+
+    public function edit($id)
+    {
+        Cache::forget('banner:'.$id);
+        Cache::forget('bannerDetail:'.$id);
+
+        $title = 'Edit Banner';
+
+        $data = Banner::find($id);
+
+        return view('banner.update', compact(
+            'title', 'data'
+        ));
     }
 
     public function store(BannerRequest $request)
@@ -22,10 +53,13 @@ class BannerController extends Controller
         $data['image'] = $filePath;
 
         Banner::create($data);
-        return redirect('/museum')->with('success', 'Data banner berhasil ditambahkan');
+        return redirect('/banner')->with('success', 'Data banner berhasil ditambahkan');
     }
 
     public function update(BannerRequest $request, $id){
+        Cache::forget('banner:'.$id);
+        Cache::forget('bannerDetail:'.$id);
+
         $data = $request->validated();
 
         if(isset($data['image'])) {
@@ -40,8 +74,8 @@ class BannerController extends Controller
         return redirect()->back()->with('success', 'Data banner berhasil di update');
     }
 
-    public function delete($id){
-        Banner::findOrFail($id)->id();
+    public function destroy($id){
+        Banner::findOrFail($id)->delete();
         return redirect('/banner')->with('success', 'Data banner berhasil dihapus');
     }
 }

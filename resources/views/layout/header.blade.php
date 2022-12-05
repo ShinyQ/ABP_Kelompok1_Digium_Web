@@ -80,7 +80,16 @@
                             </a>
                         </li>
 
+
                         <li class="menu-header">Menu Museum</li>
+
+                        <li class="{{ Request::is('banner') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('banner') }}">
+                                <i class="fas fa-image"></i>
+                                <span>Halaman Banner</span>
+                            </a>
+                        </li>
+
                         <li class="{{ Request::is('museum') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ url('museum') }}">
                                 <i class="fas fa-building"></i>
