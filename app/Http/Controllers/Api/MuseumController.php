@@ -12,7 +12,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\GetNearbyMuseumsRequest;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Auth;
 
 
 class MuseumController extends Controller
@@ -95,21 +94,21 @@ class MuseumController extends Controller
             $cacheLong = substr($long,0,-2);
             $cacheLat = substr($lat,0,-2);
             $cacheKey = "nearbyMuseums:".$cacheLong.":".$cacheLat;
-            $museums = Cache::remember($cacheKey,86400, function () use ($long,$lat){
-                $allMuseums = Cache::remember('allMuseums',86400, function () use ($long,$lat){
+            $museums = Cache::remember($cacheKey,1800, function () use ($long,$lat){
+                $allMuseums = Cache::remember('allMuseums',1800, function () use ($long,$lat){
                     return Museum::get();
                 });
                 $payload = [
                     'items' => $allMuseums->toArray(),
                     'others' => [
-                        'name' => Auth::check() ? Auth::user()->id : "digium",
                         'latitude' => $lat,
                         'longitude' => $long,
                     ],
                 ];
                 $response = Http::post('https://digium-ml.krobot.my.id/get_nearby_museum',$payload );
                 $nerby = $response->json();
-                return $nerby['data'];
+                $nearbyMuseums = Museum::whereIn('id', array_column($nerby['data'], 'id'))->get();
+                return $nearbyMuseums;
             });
             $this->response = $museums;
         } catch (Exception $e){
