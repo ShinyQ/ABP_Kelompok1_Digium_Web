@@ -99,6 +99,18 @@
                     </div>
                 </div>
                 <div class="form-group row mb-4">
+                    <label class="col-sm-2 col-form-label">Provinsi</label>
+                    <div class="col-sm-10">
+                        <input id="province" type="text" name="province" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <label class="col-sm-2 col-form-label">Kota</label>
+                    <div class="col-sm-10">
+                        <input id="city" type="text" name="city" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
                     <label class="col-sm-2 col-form-label">Phone</label>
                     <div class="col-sm-10">
                         <input id="phone" type="text" name="phone" class="form-control" disabled>
@@ -202,6 +214,8 @@
                         $('#deskripsi').val(res.data.description);
                         $('#alamat').val(res.data.address);
                         $('#harga').val(rupiah);
+                        $('#province').val(res.data.province);
+                        $('#city').val(res.data.city);
                         $('#phone').val(res.data.phone);
                         $('#year_built').val(res.data.year_built);
                         $('#detailModal').modal('show');

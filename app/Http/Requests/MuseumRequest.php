@@ -32,7 +32,10 @@ class MuseumRequest extends FormRequest
                 'phone' => ['required', 'string'],
                 'year_built' => ['required', 'string'],
                 'price' => ['integer', 'required'],
-                'coordinate' => ['required']
+                'coordinate' => ['required'],
+                'province' => ['required', 'string'],
+                'city' => ['required', 'string'],
+                'panorama' => ['image', 'mimes:jpeg,png,jpg'],
             ];
         }
         else {
@@ -44,7 +47,10 @@ class MuseumRequest extends FormRequest
                 'phone' => ['required', 'string'],
                 'year_built' => ['required', 'string'],
                 'price' => ['integer', 'required'],
-                'coordinate' => ['required']
+                'coordinate' => ['required'],
+                'province' => ['required', 'string'],
+                'city' => ['required', 'string'],
+                'panorama' => [],
             ];
         }
     }
