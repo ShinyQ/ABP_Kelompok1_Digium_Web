@@ -2,45 +2,12 @@ version: "3.7"
 services:
   app:
     build:
-      args:
-        user: digium
-        uid: 1000
-      context: ./
+      context: .
       dockerfile: Dockerfile
     image: digium
     container_name: digium-app
     restart: unless-stopped
     working_dir: /app
-    volumes:
-      - ./public:/app/public
-    depends_on:
-      - db
     command: bash -c 'php artisan serve --host=0.0.0.0 --port=8181'
     ports:
       - "8009:8181"
-    networks:
-      - digium
-
-  db:
-    image: mysql:5.7
-    container_name: digium-db
-    restart: unless-stopped
-    environment:
-      - MYSQL_DATABASE=digium
-      - MYSQL_ROOT_PASSWORD=toor
-      - MYSQL_PASSWORD=toor
-      - MYSQL_USER=digium
-      - SERVICE_TAGS=dev
-      - SERVICE_NAME=mysql
-      - TZ=Asia/Jakarta
-    volumes:
-      - db_data:/var/lib/mysql
-    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-time-zone=+07:00']
-    networks:
-      - digium
-
-networks:
-  digium:
-    driver: bridge
-volumes:
-    db_data:

@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Museum;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
 {
     public function landing(){
-        $museums = Museum::inRandomOrder()->limit(15)->get();
+        $museums = Cache::remember('museums:landing',300, function () {
+            return Museum::inRandomOrder()->limit(15)->get();
+        });
         return view('welcome', compact('museums'));
     }
 
