@@ -37,7 +37,8 @@ class MuseumController extends Controller
 
         $file = $data['background'];
         $imageName=time().$file->getClientOriginalName();
-        $filePath = 'museums/'. $imageName;
+        $filePath = 'museums/' . $imageName;
+
         Storage::disk('s3')->put($filePath, file_get_contents($file));
         $data['background'] = $filePath;
 
@@ -84,11 +85,11 @@ class MuseumController extends Controller
         unset($data['coordinate']);
 
         if(isset($data['background'])) {
-                $file = $data['background'];
-                $imageName=time().$file->getClientOriginalName();
-                $filePath = 'museums/'. $id . "/" . $imageName;
-                Storage::disk('s3')->put($filePath, file_get_contents($file));
-                $data['background'] = $filePath;
+            $file = $data['background'];
+            $imageName=time().$file->getClientOriginalName();
+            $filePath = 'museums/'. $id . "/" . $imageName;
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+            $data['background'] = $filePath;
         }
 
         Museum::where('id', $id)->update($data);

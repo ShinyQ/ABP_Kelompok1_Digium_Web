@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\MuseumController;
+use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\TransactionItemController;
@@ -31,6 +32,8 @@ Route::group(['prefix' => 'museum'], function () {
 });
 
 Route::get('gallery/{id}', [GalleryController::class, 'show']);
+
+Route::get('banner', [BannerController::class, 'index']);
 
 Route::group(['middleware' => 'user'], function() {
     Route::apiResource('transaction', TransactionController::class)->only('store', 'index', 'show', 'update');
