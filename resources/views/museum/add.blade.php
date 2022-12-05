@@ -59,6 +59,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Provinsi</label>
+                            <input type="text" class="form-control" name="province">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Kota</label>
+                            <input type="string" class="form-control" name="city">
+                        </div>
+
+                        <div class="form-group">
                             <label>Kontak</label>
                             <input type="number" class="form-control" name="phone">
                         </div>

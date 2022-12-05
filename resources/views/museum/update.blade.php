@@ -71,13 +71,24 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Provinsi</label>
+                                <input type="string" class="form-control" name="province" value="{{ $data->province }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Kota</label>
+                                <input type="string" class="form-control" name="city" value="{{ $data->city }}">
+
+                            </div>
+
+                            <div class="form-group">
                                 <label>Kontak</label>
                                 <input type="string" class="form-control" name="phone" value="{{ $data->phone }}">
                             </div>
 
                             <div class="form-group">
                                 <label>Deskripsi</label>
-                                <textarea class="form-control h-25" rows="4" name="description">{{ $data->description }}</textarea>
+                                <textarea class="form-control h-25" rows="3" name="description">{{ $data->description }}</textarea>
                             </div>
 
                             <div class="form-group">
@@ -122,7 +133,7 @@
                                         <div class="galery-overlay"></div>
                                         <a href="#" data-id="{{ $item->id }}" class="btn btn-danger btn-gallery-delete" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                                     </div>
-                             
+
                             </div>
                         </article>
                     </div>

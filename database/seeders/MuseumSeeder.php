@@ -37,6 +37,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.879046689728909,
                 'longitude' => 112.51992647162353,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Sampoerna',
@@ -49,6 +55,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.230805,
                 'longitude' => '112.7342',
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Satwa',
@@ -61,6 +73,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.8890,
                 'longitude' => 112.5285,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Dan Perpustakaan Bung Karno',
@@ -73,6 +91,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -8.0850,
                 'longitude' => 112.1753,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Malang Tempoe Doeloe',
@@ -85,6 +109,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.9781,
                 'longitude' => 112.6348,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Tubuh Manusia Bagong Adventure',
@@ -97,6 +127,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.8827,
                 'longitude' => 112.5240,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
          [
                 'name' => 'Museum Keraton Sumenep',
@@ -109,6 +145,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.0075,
                 'longitude' => 113.8622,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                 'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                 'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum 10 November',
@@ -121,6 +163,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.2451,
                 'longitude' => 112.7380,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Kanker Indonesia',
@@ -133,6 +181,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.2663,
                 'longitude' => 112.7489,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Majapahit (Trowulan)',
@@ -145,6 +199,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.5591,
                 'longitude' => 112.3806,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Anjuk Ladang',
@@ -157,6 +217,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.5932,
                 'longitude' => 111.8939,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Orasis Gallery',
@@ -169,6 +235,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.2839,
                 'longitude' => 112.6910,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Probolinggo',
@@ -181,6 +253,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.7510,
                 'longitude' => 113.2135,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Airlangga',
@@ -193,6 +271,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.8075,
                 'longitude' => 111.9716,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Fotografi Kediri',
@@ -205,6 +289,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.84666,
                 'longitude' => 112.0296,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Mpu Purwa',
@@ -217,6 +307,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.9395,
                 'longitude' => 112.6207,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Seni Islam Indonesia',
@@ -229,6 +325,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -6.8659,
                 'longitude' => 112.3615,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => "Museum D'Topeng",
@@ -241,6 +343,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.8831,
                 'longitude' => 112.5250,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum TNI AL-Loka Jala Crana',
@@ -253,6 +361,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.2264,
                 'longitude' => 112.7198,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Mpu Tantular',
@@ -265,6 +379,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.4326,
                 'longitude' => 112.7214,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Kesehatan Dr. Arhyama MPH',
@@ -277,6 +397,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.2394,
                 'longitude' => 112.7333,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Brawijaya',
@@ -289,6 +415,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.9715,
                 'longitude' => 112.6216,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Geopark Batur',
@@ -301,6 +433,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -8.2829,
                 'longitude' => 115.3643,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Ullen Sentalu',
@@ -313,6 +451,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.5973,
                 'longitude' => 110.4233,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Gunungapi Merapi',
@@ -325,6 +469,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.6154,
                 'longitude' => 110.4243,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Monumen Yogya Kembali',
@@ -337,6 +487,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -7.7488,
                 'longitude' => 110.3697,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Gedung Sate',
@@ -349,6 +505,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -6.9014,
                 'longitude' => 107.6191,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum of Zoology',
@@ -361,6 +523,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -6.5863,
                 'longitude' => 106.7955,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Taman Prasasti',
@@ -373,6 +541,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -6.1712,
                 'longitude' => 106.8188,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Sri Baduga',
@@ -385,6 +559,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -6.9370,
                 'longitude' => 107.6040,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Asmat',
@@ -397,6 +577,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -6.3061,
                 'longitude' => 106.8945,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
             [
                 'name' => 'Museum Serangga',
@@ -409,6 +595,12 @@ class MuseumSeeder extends Seeder
                 'latitude' => -6.3051,
                 'longitude' => 106.8953,
                 'price' => $this->faker->numberBetween($min = 15000, $max = 50000),
+                'province' => $this->faker->randomElement([
+                    'Jawa Barat', ' Jawa Timur', 'Jawa Tengah', 'Jakarta'
+                ]),
+                'city' => $this->faker->randomElement([
+                    'Jakarta Pusat', 'Malang', 'Bali', 'Jakarta Barat'
+                ])
             ],
         ];
     DB::table('museums')->insert($data);

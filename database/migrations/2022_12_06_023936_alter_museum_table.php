@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function($table) {
-            $table->date('for_date')->nullable()->default(now());
+        Schema::table('museums', function($table) {
+            $table->string('province')->nullable();
+            $table->string('city')->nullable();
         });
     }
 
@@ -25,8 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn('for_date');
-        });
+        //
     }
 };
