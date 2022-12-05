@@ -3,6 +3,12 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
+// disable php serialize_precision for numeric value
+if (version_compare(phpversion(), '7.1', '>=')) {
+    ini_set( 'precision', 17 );
+    ini_set( 'serialize_precision', -1 );
+}
+
 define('LARAVEL_START', microtime(true));
 
 /*

@@ -25,6 +25,7 @@ Route::group(['prefix' => 'user'], function () {
 });
 
 Route::group(['prefix' => 'museum'], function () {
+    Route::get('/nearby', [MuseumController::class, 'nearby']);
     Route::get('/', [MuseumController::class, 'index']);
     Route::get('/{id}', [MuseumController::class, 'show']);
 });
