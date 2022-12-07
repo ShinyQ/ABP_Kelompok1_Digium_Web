@@ -9,3 +9,5 @@ WORKDIR /app
 COPY . /app
 
 RUN composer install --ignore-platform-reqs
+
+RUN php artisan passport:install
