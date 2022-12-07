@@ -20,6 +20,7 @@ use App\Http\Controllers\BannerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/download', [DashboardController::class, 'download']);
 Route::get('/', [DashboardController::class, 'landing']);
 Route::get('/email/{id}', [UserController::class, 'verify_email']);
 Route::get('auth/callback', [GoogleProviderController::class, 'redirectToGoogle']);

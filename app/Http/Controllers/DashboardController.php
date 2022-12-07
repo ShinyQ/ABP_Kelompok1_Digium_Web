@@ -3,16 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Museum;
+use App\Models\Release;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
 {
+    public function download(){
+        $downloadLink = Cache::remember('latestApp',300, function () {
+            return Release::latest()->first();
+        });
+        return redirect()->away($downloadLink->path);
+    }
     public function landing(){
+        $downloadLink = Cache::remember('latestApp',300, function () {
+            return Release::latest()->first();
+        });
         $museums = Cache::remember('museums:landing',300, function () {
             return Museum::inRandomOrder()->limit(15)->get();
         });
-        return view('welcome', compact('museums'));
+        return view('welcome', compact('museums', 'downloadLink'));
     }
 
     public function index(){
