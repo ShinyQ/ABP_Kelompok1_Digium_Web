@@ -91,7 +91,7 @@
                 </h1>
 
                 <div class="buttons">
-                    <a href="#download" class="smoothscroll button stroke">
+                    <a href="{{ $downloadLink->path }}" class="smoothscroll button stroke">
                         <span class="icon-circle-down" aria-hidden="true"></span>
                         Download App
                     </a>
