@@ -65,7 +65,7 @@
             <li><a class="smoothscroll" href="#testimonials" title="testimonials">Museums</a></li>
         </ul>
 
-        <a href="#" title="sign-up" class="button button-primary cta">Download</a>
+        <a href="{{ $downloadLink->path }}" title="sign-up" class="button button-primary cta">Download</a>
     </nav>
 
     <a class="header-menu-toggle" href="#"><span>Menu</span></a>
@@ -272,8 +272,7 @@
                 <img src="{{ asset('assets/images/qr-code.png') }}" alt="QR Code Aplikasi Digium" width="150px">
             </p>
             <ul class="download-badges">
-                <li><a href="https://bit.ly/digiumapp" title="" class="badge-appstore">App Store</a></li>
-                <li><a href="https://bit.ly/digiumapp" title="" class="badge-googleplay">Play Store</a></li>
+                <li><a href="{{ $downloadLink->path }}" title="" class="badge-googleplay">Play Store</a></li>
             </ul>
         </div>
     </div>
