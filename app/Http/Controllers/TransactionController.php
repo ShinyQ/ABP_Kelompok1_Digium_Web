@@ -49,7 +49,7 @@ class TransactionController extends Controller
             $filePath = 'transactions/' . $imageName;
             Storage::disk('s3')->put($filePath, file_get_contents($name));
             File::delete($name);
-            TransactionItem::where('id', $item->id)->update(['qr_code' => $name, 'status'=> 'Waiting']);
+            TransactionItem::where('id', $item->id)->update(['qr_code' => $name, 'status'=> 'Paid']);
         }
 
         return redirect()->back()->with('success', 'Sukses verifikasi transaksi');
